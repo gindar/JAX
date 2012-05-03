@@ -17,6 +17,5 @@ Baleni vlastni verze JAXu (vytvari jax.js jax-all.js a jax-<verze>.zip):
 
   './build.sh' - vybuildi jen jax.js a jax-all.js
   
-Chyby a napady:
-http://cml.kancelar.seznam.cz/genericbrno/wiki/webmasters/jax
+Chyby a napady: https://github.com/gindar/JAX/issues
 
