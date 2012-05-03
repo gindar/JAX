@@ -18,8 +18,6 @@
 	.note			{ background:#efe;border:solid #af8 1px; border-radius:3px; padding:3px; font-size: 12px; }
 </style>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<script src="jak.js"></script>
-<script src="jax-all.js"></script>
 </head>
 <body id="jaxdoc">
 
@@ -84,13 +82,7 @@
 			<tr><td>style</td><td>asoc. pole</td><td>nastaví elementu style dle obsahu pole Např.: {"color":"#F00","zIndex":120}</td></tr>
 		</table>
 		<br/>
-		<b>Dále je mozno zadat různé události (vypsáno z JAX._elmEvents):</b><br/>
-		<script>
-			for( var i = 0; i < JAX._elmEvents.length; i ++){
-				if( i != 0 ) document.write(", ");
-				document.write(JAX._elmEvents[i]);
-			}
-		</script>
+		<b>Dále je mozno zadat různé události viz JAX._elmEvents</b><br/>
 		<br/>
 		<b>A teoreticky jakoukoli jinou vlastnost elementu.</b>
 		Např.: target, href, name, src ...<br>

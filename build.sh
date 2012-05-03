@@ -1,23 +1,25 @@
-cat info.txt
+#!/bin/sh
 VERSION=`cat version`
+
+rm -Rf ./build/*
+mkdir ./build
 
 if [ "$1" = "devel" ]; then
 	VERSION=`cat version`"-"`date +"%Y%m%d.devel"`
 fi
 
-cat src/core.js src/element.js src/deco.js src/dom.js src/dombuilder.js src/fx.js > jax.js
-cat deps/timekeeper.js deps/interpolator.js jax.js > jax-all.js
-cat deps/jak.js deps/timekeeper.js deps/interpolator.js jax.js > jaxsa.js
-echo "JAX.version='$VERSION';" >> jax.js
-echo "JAX.version='$VERSION-alldeps';" >> jax-all.js
-echo "JAX.version='$VERSION-sa';" >> jaxsa.js
-cp jax-all.js doc/
+cat src/core.js src/element.js src/deco.js src/dom.js src/dombuilder.js src/fx.js > build/jax.js
+cat deps/timekeeper.js deps/interpolator.js build/jax.js > build/jax-all.js
+cat deps/jak.light.js deps/timekeeper.js deps/interpolator.js build/jax.js > build/jaxsa.js
+echo "JAX.version='$VERSION';" >> build/jax.js
+echo "JAX.version='$VERSION-alldeps';" >> build/jax-all.js
+echo "JAX.version='$VERSION-sa';" >> build/jaxsa.js
 
 if [ "$1" = "release" ]; then
-	zip jax-$VERSION.zip src/* deps/* test/* doc/* jax.js jax-all.js jaxsa.js info.txt
+	zip build/jax-$VERSION.zip deps/* test/* doc/* build/jax.js build/jax-all.js build/jaxsa.js README.md
 fi
 
 if [ "$1" = "devel" ]; then
-	zip jax-$VERSION.zip version src/* deps/* test/* doc/* build.sh info.txt info_devel.txt
+	zip build/jax-$VERSION.zip version src/* deps/* test/* doc/* build.sh README.md
 fi
 
