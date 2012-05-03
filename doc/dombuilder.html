@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<title>JAX Manuál</title>
+<style type="text/css" media="screen">
+	body,html { font-family: sans-serif; background:#210; margin:0;padding:0; font-size:14px; }
+	#header 		{ padding:20px; border-bottom:solid #F80 1px; background:#fa0;border-radius:10px 10px 0px 0px; }
+	#header h1		{ font-size:28px; margin:0px;padding:0px;  }
+	#content { width:960px; background:#fff; font-size:14px; color:#000; margin: 10px auto; border-radius:10px; }
+	#content-in		{ padding:20px; }
+	h2				{ background:#fa0; margin:0px; font-size:24px; margin-top:40px; padding:10px; border-radius:5px;border-left:solid #000 15px; }
+	h3				{ border-left:solid #fa0 10px; font-size:18px; margin:0px; margin-top:30px; padding:5px; background:#fea; border-radius:5px; }
+	h4				{ margin:0px; margin-top:10px; font-size:16px; }
+	a				{ color:#06f; font-weight:bold; }
+	a:hover			{ color:#00f; }
+	.menu			{  }
+	.example		{ background:#ddd; border-radius:5px; padding:10px; font-family:monospace; }
+	.note			{ background:#efe;border:solid #af8 1px; border-radius:3px; padding:3px; font-size: 12px; }
+</style>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script src="jak.js"></script>
+<script src="jax-all.js"></script>
+</head>
+<body id="jaxdoc">
+
+<div id="content">
+	<div id="header">
+		<h1><img src="logo.png" style="float:right"/> JAX Manuál ↓</h1>
+	</div>
+	<div id="content-in">
+		<ul class="menu">
+			<li><a href="collection.html">Kolekce elementů</a></li>
+			<li><a href="decorators.html">Metody elementu</a></li>
+			<li><a href="dombuilder.html">DOMBuilder</a></li>
+			<li><a href="other.html">Ostatní funkce</a></li>
+		</ul>
+
+
+
+
+
+
+
+
+		<h2 id="dombuilder">DOMBuilder</h2>
+		<p>
+			Třída slouží k pohodlnějšímu vytváření struktury HTMLElementů.
+		</p>
+		<h3 id="dombuilder_add">&lt;DOMBuilder&gt;.add( def [, attrs ] )</h3>
+		<p>
+			Vytvoří a přidá do aktuálního umístění nový element. Argument <b>def</b> je
+			stejný jako u <a href="other.html#jax_make">JAX.make()</a>, tedy string podobný CSS query.
+			<b>attrs</b> je asoc. pole parametrů, opět funguje stejně jako u <a href="other.html#jax_make">JAX.make()</a>.
+			<br/>Více v <a href="#dombuilder_example">příkladu</a>.
+		</p>
+
+		<h3 id="dombuilder_addbox">&lt;DOMBuilder&gt;.addBox( def [, attrs ] )</h3>
+		<p>
+			Metoda je shodná s <a href="#dombuilder_add">&lt;DOMBuilder&gt;.add()</a> s tím rozdílem, že
+			vytvořený element je kontejnerem a další vložené elementy budou potomky tohoto elementu.
+			<b>Argumenty jsou shodné s <a href="#dombuilder_add">&lt;DOMBuilder&gt;.add()</a></b>
+			<br/>Více v <a href="#dombuilder_example">příkladu</a>.
+		</p>
+
+		<h3 id="dombuilder_endbox">&lt;DOMBuilder&gt;.endBox( )</h3>
+		<p>
+			Metoda "uzavře" aktuální kontejnerový element a další vkládáné elementy budou
+			potomky rodiče.
+			<br/>Více v <a href="#dombuilder_example">příkladu</a>.
+		</p>
+
+		<h3 id="dombuilder_addelement">&lt;DOMBuilder&gt;.addElement( elm )</h3>
+		<p>
+			Funguje podobně jako metoda <a href="#dombuilder_add">&lt;DOMBuilder&gt;.add()</a>
+			s tím rozdílem, že jako argument předáváme již vytvořený element.
+			<br/>Více v <a href="#dombuilder_example">příkladu</a>.
+		</p>
+
+		<h3 id="dombuilder_addelement">&lt;DOMBuilder&gt;.addBoxElement( elm )</h3>
+		<p>
+			Funguje podobně jako metoda <a href="#dombuilder_addbox">&lt;DOMBuilder&gt;.addBox()</a>
+			s tím rozdílem, že jako argument předáváme již vytvořený element. Kontejner se uzavře
+			pomocí <a href="#dombuilder_endbox">&lt;DOMBuilder&gt;.endBox()</a>.
+			<br/>Více v <a href="#dombuilder_example">příkladu</a>.
+		</p>
+
+		<h3 id="dombuilder_addtext">&lt;DOMBuilder&gt;.addText( text )</h3>
+		<p>
+			Metoda je funguje podobně jako <a href="#dombuilder_add">&lt;DOMBuilder&gt;.add()</a> jen vkládá do
+			místo elementu <b>text</b> (čistý text - createTextNode).
+			<br/>Více v <a href="#dombuilder_example">příkladu</a>.
+		</p>
+
+		<h3 id="dombuilder_getdom">&lt;DOMBuilder&gt;.getDom( )</h3>
+		<p>
+			Vrací celý již vytvořený strom elementů jako DocumentFragment. Není vhodné využívat výstup této metody
+			k uchování reference na celý strom elementů, jelikož po appendnutí do dokumentu se documentFragment vyprázdní.
+			<br/>Více v <a href="#dombuilder_example">příkladu</a>.
+		</p>
+
+		<h3 id="dombuilder_appendto">&lt;DOMBuilder&gt;.appendTo( element )</h3>
+		<p>
+			Vloží vygenerované elementy do zadaného elementu :)
+		</p>
+
+		<h3 id="dombuilder_example">Příklad</h3>
+		<br>
+		<div class="example">
+			var elm = document.createElement("div");<br>
+			var dom = new JAX.DOMBuilder();<br>
+			dom.addBox("div.trida1",{ "style":{ "background": "#f00" } });<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;dom.add("a#odkaz",{ "href": "/path/to", "html": "Odkaz" });<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;dom.addBoxElement( elm );<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dom.addText("Test");<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;dom.endBox();<br>
+			dom.endBox();<br>
+			<br>
+			var frag = dom.getDom();// strom vytvořených elementů<br>
+			document.body.appendChild( frag );<br>
+			// v tomto místě je frag jen prázdný documentFragment<br>
+		</div>
+		<b>Výstup zapsaný v HTML:</b>
+		<div class="example">
+			&lt;div class="trida" style="background:#f00"&gt;<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;a id="odkaz" href="/path/to"&gt;Odkaz&lt;/a&gt;<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+			&lt;/div&gt;<br>
+		</div>
+
+		<h3 id="dombuilder_addtemplate">&lt;DOMBuilder&gt;.addTemplate( template , data )</h3>
+		<p>
+			Tato mocná metoda přijímá v argumentu <b>template</b> string nebo element jež poslouží jako šablona pro <b>data</b>.<br/>
+			Základem je string či innerHTML ze zadaného elementu. V této "šabloně" se nahrazují určité řetězce daty předanými v <b>data</b>.
+			<b>data</b> mohou být i polem, v tom případě slouží šablona jako předloha pro jeden prvek pole.<br/>
+			Nejlepší bude úkázat to na příkladu.<br>
+			Pokud je <b>template</b> element vezme se jako šablona jeho innerHTML.
+
+		</p>
+		<h4>Syntaxe & příkazy</h4>
+		<p>
+			<b>{key}</b> - toto je nahrazeno odpovídajicí hodnotou z data ( data["key"] )<br>
+			<b>{:index}</b> - pokud je data pole pak každá položka má svůj index, tímto jej můžeme vypsat do šablony<br>
+			<b>{:number}</b> - podobné jako index, ale počítá se od 1 nikoli od 0<br>
+			<b>{:first}</b> a <b>{:last}</b> - tímto lze označit první a poslední položku {:first} se nahradí obsahem <b>JAX.DOMBuilder.FIRST_STRING</b> a {:last}<br>
+			&nbsp;&nbsp;&nbsp;&nbsp; tímto <b>JAX.DOMBuilder.LAST_STRING</b> ( můžete si je tedy sami nastavit - defaultně jsou "first" a "last" )<br>
+			<b>{:if key}něco{/}</b> - vypíše "něco" pokud je hodnota skrývající se pod zadaným klíčem == true jinak nic<br>
+		</p>
+		<h4>Příklad addTemplate</h4>
+		<div class="example">
+			data = [<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;{ "name": "Hynek", "sex": "muž", "prsa": false },<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;{ "name": "Jarmila", "sex": "žena", "prsa": true },<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;{ "name": "Vilém", "sex": "muž", "prsa": false }<br>
+			]<br>
+			<br>
+			template = "&lt;div class="{:first}{:last}"&gt;{:number}. Jméno:{name} ({sex}) {:index} {:if prsa}Má prsa{/}&lt;/div&gt;"<br>
+			<br>
+			var dom = new JAX.DOMBuilder();<br>
+			dom.addBox("div.trida1");<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;dom.addTemplate( template, data );<br>
+			dom.endBox();<br>
+		</div>
+		<b>Výstup zapsaný v HTML:</b>
+		<div class="example">
+			&lt;div class=" trida1"&gt;<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="first"&gt;1. Jméno:Hynek (muž) 0 &lt;/div&gt;<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=""&gt;2. Jméno:Jarmila (žena) 1 Má prsa&lt;/div&gt;<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="last"&gt;3. Jméno:Vilém (muž) 2 &lt;/div&gt;<br>
+			&lt;/div&gt;<br>
+		</div>
+
+
+
+		<h3 id="dombuilder_notes">Poznámky</h3>
+		<p>
+			Elementy vytvořené metodami add() a addBox() jsou odekorovány
+			pomocí <a href="decorators.html#jaxdd">JAX.$$</a>.<br>
+			Pokud vytváříme větší množství elementů je vhodné dekorování
+			vypnout a použít jej jen tam, kde bude opravdu potřeba. K tomu slouží
+			vlastnost .decorating, která je defaultně true.
+		</p>
+		<h4>Příklad</h4>
+		<div class="example">
+			var dom = new JAX.DOMBuilder();<br>
+			dom.addBox("div");<br>
+			<b>dom.decorating = false;</b>// vypnu dekorování<br>
+			for( var i = 0; i < 1000; i ++ ){<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;dom.add("div");<br>
+			}<br>
+			<b>dom.decorating = true;</b>// opět jej zapnu<br>
+			dom.endBox();<br>
+		</div>
+
+
+
+
+
+
+		<br/><br/>
+		<br/><br/>
+		<span>JAX != jQuery (jQuery je oproti JAXu sračka)</span><br/>
+		<em>Josef Vanžura 2011</em>
+	</div>
+</div>
+</body></html>

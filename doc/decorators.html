@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<title>JAX Manuál</title>
+<style type="text/css" media="screen">
+	body,html { font-family: sans-serif; background:#210; margin:0;padding:0; font-size:14px; }
+	#header 		{ padding:20px; border-bottom:solid #F80 1px; background:#fa0;border-radius:10px 10px 0px 0px; }
+	#header h1		{ font-size:28px; margin:0px;padding:0px;  }
+	#content { width:960px; background:#fff; font-size:14px; color:#000; margin: 10px auto; border-radius:10px; }
+	#content-in		{ padding:20px; }
+	h2				{ background:#fa0; margin:0px; font-size:24px; margin-top:40px; padding:10px; border-radius:5px;border-left:solid #000 15px; }
+	h3				{ border-left:solid #fa0 10px; font-size:18px; margin:0px; margin-top:30px; padding:5px; background:#fea; border-radius:5px; }
+	h4				{ margin:0px; margin-top:10px; font-size:16px; }
+	a				{ color:#06f; font-weight:bold; }
+	a:hover			{ color:#00f; }
+	.menu			{  }
+	.example		{ background:#ddd; border-radius:5px; padding:10px; font-family:monospace; }
+	.note			{ background:#efe;border:solid #af8 1px; border-radius:3px; padding:3px; font-size: 12px; }
+</style>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script src="jak.js"></script>
+<script src="jax-all.js"></script>
+</head>
+<body id="jaxdoc">
+
+<div id="content">
+	<div id="header">
+		<h1><img src="logo.png" style="float:right"/> JAX Manuál ↓</h1>
+	</div>
+	<div id="content-in">
+		<ul class="menu">
+			<li><a href="collection.html">Kolekce elementů</a></li>
+			<li><a href="decorators.html">Metody elementu</a></li>
+			<li><a href="dombuilder.html">DOMBuilder</a></li>
+			<li><a href="other.html">Ostatní funkce</a></li>
+		</ul>
+
+
+
+
+
+
+		<h2 id="elmdecor">Metody elementu</h2>
+		<p>
+			Největší část této knihovny se věnuje odekorování elementu užitečnými metodami.
+			Odekorovaní provádí <a href="collection.html#jaxd">JAX.$</a> nebo následující funkce.
+		</p>
+
+		<h3 id="jaxdd">JAX.$$( element_id )</h3>
+		<p>
+			Najde element s id == <b>element_id</b> a odekoruje jej. Místo ID lze
+			předat objekt HTMLElement. Funkce vrací odekorovaný element nebo null pokud
+			element nenajde dle ID.
+		</p>
+
+
+		<ul class="menu">
+			<li><a href="#element_animate">element.animate</a></li>
+			<li><a href="#element_animateStop">element.animateStop</a></li>
+			<li><a href="#element_delay">element.delay</a></li>
+			<li><a href="#element_callfunction">element.callFunction</a></li>
+			<li><a href="#element_addelement">element.addElement</a></li>
+			<li><a href="#element_nextnode">element.nextNode</a></li>
+			<li><a href="#element_prevnode">element.prevNode</a></li>
+			<li><a href="#element_addclass">element.addClass</a></li>
+			<li><a href="#element_removeclass">element.removeClass</a></li>
+			<li><a href="#element_hasclass">element.hasClass</a></li>
+			<li><a href="#element_event">element.event</a></li>
+			<li><a href="#element_removeevent">element.removeEvent</a></li>
+			<li><a href="#element_modify">element.modify</a></li>
+			<li><a href="#element_append">element.append</a></li>
+			<li><a href="#element_remove">element.remove</a></li>
+			<li><a href="#element_storevalue">element.storeValue</a></li>
+			<li><a href="#element_restorevalue">element.restoreValue</a></li>
+			<li><a href="#element_toggle">element.toggle</a></li>
+			<li><a href="#element_show">element.show</a></li>
+			<li><a href="#element_hide">element.hide</a></li>
+			<li><a href="#element_getrect">element.getRect</a></li>
+			<li><a href="#element_locking">Zamykání elementu</a></li>
+		</ul>
+
+
+
+		<h3 id="element_animate">element.animate( time, what, start, end, [ method, endcallback ] )</h3>
+		<div class="note">Tato metoda <a href="#element_locking">zamyká element</a>.</div>
+		<div class="note">Tato metoda vyžaduje JAK.CSSInterpolator. Soubor jax-all.js obsahuje vždy funkční verzi.</div>
+		<p>
+			Metoda slouží k animaci CSS vlastností. Je třeba zadat <b>time</b> v
+			milisekundách a co se bude animovat <b>what</b> (viz níže). Další
+			potřebnou informací je v jakém rozsahu hodnot animace proběhne <b>start</b> - <b>end</b>.
+		</p>
+		<p>
+			Parametry <b>start</b> a <b>end</b> je vhodné zadávat i s jednotkou ( např.: "100px", "20%" )
+			nebo ve vhodném formátu ( color: "#ff0000" ).<br>
+			U některých délkových vlastností se jednotka nemusí uvádět a pak se použije "px".
+			( které to jsou lze zjistit v poli JAX._animatePXUnits )<br>
+			Pokud je parametr <b>start</b> zadán jako <i>null</i> pak se zkouší
+			najít hodnota nastavená na elementu (pomocí JAK.DOM.getStyle ) - používat s rozvahou.
+
+		</p>
+		<h4>Příklady animovatelných vlastností</h4>
+		<table>
+			<tr><th width="200">vlastnost</th><th>hodnoty</th></tr>
+			<tr><td>width</td><td>"100px", "200px"</td></tr>
+			<tr><td>opacity</td><td>0.0, 1.0</td></tr>
+			<tr><td>backgroundColor</td><td>"#000000", "#ff0000"</td></tr>
+		</table>
+		Lze animovat teoreticky jakoukoli CSS vlastnost, stačí znát její správný název :)
+
+		<h4>Příklad</h4>
+		<div class="example">
+			// animuje vysku elementu 10-100px po dobu 500ms<br>
+			elm.animate( 500, "height", "10px", "100px" )<br>
+			// animuje vysku od stavajici vysky po 100px<br>
+			elm.animate( 500, "height", null, "100px" ) <br>
+			// animuje vysku a sirku od stavajici vysky a sirky po 100px<br>
+			elm.animate( 500, "width", null, "100px" ).animate( 500, "height", null, "100px" )<br>
+		</div>
+
+
+
+
+		<h3 id="element_animateStop">element.animateStop( [ what ] )</h3>
+		<p>
+			Zastavuje běžící animace. Pokud je zadán <b>what</b> zastaví jen animaci dané vlastnosti.
+		</p>
+		<h4>Příklad</h4>
+		<div class="example">
+			// animace vysky a sirky; animace sirky se stopne <br>
+			elm.animate( 500, "height", "10px", "100px" )<br>
+			elm.animate( 500, "width", "10px", "100px" )<br>
+			elm.animateStop( "height" )<br>
+		</div>
+
+
+
+
+		<h3 id="element_delay">element.delay( time )</h3>
+		<div class="note">Tato metoda <a href="#element_locking">zamyká element</a>.</div>
+		<p>
+			Na zadaný čas <b>time</b> "zamkne" volání dalších metod. Neovlivňuje
+			další delay nebo metodu <a href="#element_animate">element.animate</a>.
+		</p>
+		<h4>Příklad</h4>
+		<div class="example">
+			// za 5 sekund skryje element<br>
+			element.delay( 5000 ).hide()
+		</div>
+
+
+
+		<h3 id="element_callfunction">element.callFunction( func )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Volá zadanou funkci <b>func</b> s argumentem elm jež se rovná danému elementu.
+		</p>
+		<h4>Příklad</h4>
+		<div class="example">
+			// po uplynuti 500ms zmeni barvu textu v elementu na cervenou<br>
+			element.delay(500).callFunction(function(elm){ elm.style.color = "#f00" })
+		</div>
+
+
+
+		<h3 id="element_addelement">element.addElement( def, attrs )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Metoda vytvoří potomka daného elementu dle zadaných parametrů. Více u <a href="other.html#jaxmake">JAX.make</a>.
+		</p>
+		<h4>Příklad</h4>
+		<div class="example">
+			// v elementu vytvori div s className="trida" a innerHTML="Text"<br>
+			element.addElement("div.trida",{html:"Text"})
+		</div>
+
+
+
+
+		<h3 id="element_nextnode">element.nextNode( query )</h3>
+		<div class="note">Tato metoda se nedá použít pro <a href="collections.html#htmlcollection">kolekci</a>.</div>
+		<p>
+			Metoda hledá nejbližší element za aktuálním elementem vyhovující zadané <a href="collections.html">query</a>.
+		</p>
+		<h4>Příklad</h4>
+		<div class="example">
+			// vraci neblizsi div.trida<br>
+			element.nextNode( "div.trida" )
+		</div>
+
+
+
+
+		<h3 id="element_prevnode">element.prevNode( query )</h3>
+		<div class="note">Tato metoda se nedá použít pro <a href="#htmlcollection">kolekci</a>.</div>
+		<p>
+			Stejná metoda jako <a href="#element_nextnode">element.nextNode</a> jen hledá před elementem.
+		</p>
+
+		<h3 id="element_addclass">element.addClass( cls, ... )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Přidá elementu třídu <b>cls</b>.
+		</p>
+		<div class="note">Od verze 1.15 lze předat libovolný počet argumentů. Všechny zadané třídy budou přidány.</div>
+
+		<h3 id="element_removeclass">element.removeClass( cls, ... )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Odebere elementu třídu <b>cls</b>.
+		</p>
+		<div class="note">Od verze 1.15 lze předat libovolný počet argumentů. Všechny zadané třídy budou odstraněny.</div>
+
+		<h3 id="element_hasclass">element.hasClass( cls )</h3>
+		<div class="note">Tato metoda se nedá použít pro <a href="#htmlcollection">kolekci</a>.</div>
+		<p>
+			Vrací true pokud má element třídu <b>cls</b>.
+		</p>
+
+
+
+
+		<h3 id="element_event">element.event( type, callback_obj, callback_method [ , ... ] )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Navěsí na element posluchač události <b>type</b>. <br>
+			Callback lze zadat dvěma způsoby:<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;element.event( "click", this.method.bind(this) )<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;element.event( "click", this, "method" )<br>
+			<b>Metoda vrací ID posluchače události.</b>
+		</p>
+		<p>
+			Další argumenty funkce jsou předány callbacku.
+		</p>
+		<h4>Příklad</h4>
+		<div class="example">
+			function func( e, elm, arg1, arg2 ){<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;// arg1 == 666<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;// arg2 == { "a": "Test" }<br>
+			}<br>
+			// naveseni posluchace<br>
+			element.event( "click", func, false, 666, { "a": "Test" } )
+		</div>
+
+		<h3 id="element_removeevent">element.removeEvent( type )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Odstraní posluchače daného typu <b>type</b> události.
+		</p>
+		<h4>Příklad</h4>
+		<div class="example">
+			element.event( "click", func )<br>
+			element.removeEvent( "click" )
+		</div>
+
+
+		<h3 id="element_modify">element.modify( attrs )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Změni element pomocí fce <a href="#jaxmodify">JAX.modify</a>.
+		</p>
+		<h4>Příklad</h4>
+		<div class="example">
+			element.modify( { "style": { "color": "#f00" } } )
+		</div>
+
+
+
+		<h3 id="element_append">element.append( elements [, time ] )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Appenduje do elementu prvky z pole <b>elements</b>. Místo pole lze
+			zadat jen jeden prvek, pak funguje jako klasický appendChild.<br>
+			Pokud je zadán čas v ms <b>time</b> pak se vložení elementů animuje
+			(opacity 0.0-1.0).
+		</p>
+
+
+		<h3 id="element_remove">element.remove( [ time ] )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Odstraní element ze svého rodiče.<br>
+			Pokud je zadán čas v ms <b>time</b> pak se odstranění elementu animuje
+			(opacity 1.0-0.0).
+		</p>
+
+		<h3 id="element_storevalue">element.storeValue( key, value )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Uloží do vlastnosti elementu hodnotu <b>value</b> pod zadaný klíč <b>key</b>. Hodnota může být cokoli.
+		</p>
+
+		<h3 id="element_restorevalue">element.restoreValue( key, default_value )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<div class="note">Tato metoda se nedá použít pro <a href="#htmlcollection">kolekci</a>.</div>
+		<p>
+			Vrací uloženou hodnotu podle daného klíče <b>key</b>. Pokud není klíč nalezen vrací <b>default_value</b>.
+		</p>
+
+		<h3 id="element_toggle">element.toggle( [ time ] )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Přepíná zobrazení elementu. Parametr <b>time</b> slouží k animaci. Využívá element.show/hide více tam.
+		</p>
+
+		<h3 id="element_show">element.show( [ time, target_opacity, inline ] )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Zobrazí element - nastaví .style.display na "block" nebo ( pokud je argument inline == true ) na "inline".<br>
+			Pokud je zadán argument <b>time</b> pak se zobrazení animuje ( opacity 0.0 - 1.0 ), lze nastavit maximální
+			hodnotu opacity argumentem <b>target_opacity</b>.
+		</p>
+
+		<h3 id="element_hide">element.hide( [ time ] )</h3>
+		<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+		<p>
+			Funguje přesně opačně než <a href="#element_show">element.show</a>.
+		</p>
+
+		<h3 id="element_getrect">element.getRect( [ meter_in_dom ] )</h3>
+		<p>
+			Tato metoda vrací objekt obsahujicí informace o poloze a velikosti elementu. Je-li volitelný argument
+			<b>meter_in_dom</b> == true pak se bude velikost elementu měřit v místě kde je - budou na něj aplikována CSS pravidla z rodiče. Více informací u <a href="#jax_offscreenmeter">JAX.OffScreenMeter</a>.
+		</p>
+		<div class="example">
+			element.getRect() =&gt; {<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;"left": #,<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;"top": #,<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;"width": #,<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;"height": #<br/>
+			}
+		</div>
+
+
+
+		<h3 id="element_locking">Zamykání elementu</h3>
+		<p>
+			Některé metody umí po dobu svého běhu "zamknout" element. To znamená, že
+			volání některých metod se pozdrží až doběhne "zámek". Metody jež jsou blokovány jsou označeny poznámkou.<br>
+			<br>
+			Toto zamykání dělají metody:
+			<ul>
+				<li><a href="#element_animate">element.animate</a></li>
+				<li><a href="#element_delay">element.delay</a></li>
+			</ul>
+			A tyto metody zamykají pokud je u nich použita animace průhlednosti:
+			<ul>
+				<li><a href="#element_show">element.show</a></li>
+				<li><a href="#element_hide">element.hide</a></li>
+				<li><a href="#element_toggle">element.toggle</a></li>
+				<li><a href="#element_append">element.append</a></li>
+				<li><a href="#element_remove">element.remove</a></li>
+			</ul>
+		</p>
+		<h4>Příklad</h4>
+		<div class="example">
+			// probehne animace vysky 100-0px a po jejim ukonceni se element skryje<br>
+			element.animate( 500, "height", "100px", "0px" ).hide()
+		</div>
+
+
+
+
+
+
+		<br/><br/>
+		<br/><br/>
+		<span>JAX != jQuery (jQuery je oproti JAXu sračka)</span><br/>
+		<em>Josef Vanžura 2011</em>
+	</div>
+</div>
+</body></html>

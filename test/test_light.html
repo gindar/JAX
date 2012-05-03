@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jax test</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<script src="../deps/jak.light.js"></script>
+		<script src="../deps/timekeeper.js"></script>
+		<script src="../deps/interpolator.js"></script>
+		<script src="../src/core.js"></script>
+		<script src="../src/dom.js"></script>
+		<script src="../src/element.js"></script>
+		<script src="../src/deco.js"></script>
+		<script src="../src/fx.js"></script>
+		<script src="../src/dombuilder.js"></script>
+	</head>
+	<body>
+		<style>
+			body,html {background:#000; color:#fff; }
+		</style>
+		
+		<div class="axe"></div>
+		<script>
+			JAX.DEBUG = true;
+			elms = JAX.$("div.axe");
+			console.log( elms.getdebug() );
+		</script>
+	</body>
+</html>

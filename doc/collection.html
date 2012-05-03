@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<title>JAX Manuál</title>
+<style type="text/css" media="screen">
+	body,html { font-family: sans-serif; background:#210; margin:0;padding:0; font-size:14px; }
+	#header 		{ padding:20px; border-bottom:solid #F80 1px; background:#fa0;border-radius:10px 10px 0px 0px; }
+	#header h1		{ font-size:28px; margin:0px;padding:0px;  }
+	#content { width:960px; background:#fff; font-size:14px; color:#000; margin: 10px auto; border-radius:10px; }
+	#content-in		{ padding:20px; }
+	h2				{ background:#fa0; margin:0px; font-size:24px; margin-top:40px; padding:10px; border-radius:5px;border-left:solid #000 15px; }
+	h3				{ border-left:solid #fa0 10px; font-size:18px; margin:0px; margin-top:30px; padding:5px; background:#fea; border-radius:5px; }
+	h4				{ margin:0px; margin-top:10px; font-size:16px; }
+	a				{ color:#06f; font-weight:bold; }
+	a:hover			{ color:#00f; }
+	.menu			{  }
+	.example		{ background:#ddd; border-radius:5px; padding:10px; font-family:monospace; }
+	.note			{ background:#efe;border:solid #af8 1px; border-radius:3px; padding:3px; font-size: 12px; }
+</style>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script src="jak.js"></script>
+<script src="jax-all.js"></script>
+</head>
+<body id="jaxdoc">
+
+<div id="content">
+	<div id="header">
+		<h1><img src="logo.png" style="float:right"/> JAX Manuál ↓</h1>
+	</div>
+	<div id="content-in">
+		<ul class="menu">
+			<li><a href="collection.html">Kolekce elementů</a></li>
+			<li><a href="decorators.html">Metody elementu</a></li>
+			<li><a href="dombuilder.html">DOMBuilder</a></li>
+			<li><a href="other.html">Ostatní funkce</a></li>
+		</ul>
+
+
+
+
+
+
+		<h2 id="collection">Kolekce elementů</h2>
+
+		<h3 id="jaxd">JAX.$( query, [ context, single ] )</h3>
+		<p>
+			Tato funkce vyhledá v aktuálním dokumentu ( nebo v rámci nějakého
+			elementu <b>context</b> ) elementy vyhovující zadané CSS1 <b>query</b>.
+		</p>
+		<p>
+			Pokud je zadán argument single == true pak funkce vrátí jeden (první)
+			element jež je <a href="decorators.html">odekorován</a>. V opačném případě
+			je vrácena instance <a href="#htmlcollection">JAX.HTMLCollection</a>.
+		</p>
+		<h4>Příklad</h4>
+		<div class="example">
+			JAX.$( "div#box div a.link" )<br>
+			JAX.$( "div a, span a, ul li a" )<br>
+		</div>
+
+		<h3 id="htmlcollection">JAX.HTMLCollection</h3>
+		<p>
+			Toto je třída jež uchovává seznam elementů a stará se o hromadné volání
+			<a href="decorators.html">metod elementu</a>. Při vytvoření kolekce se všechny její
+			prvky odekorují.<br>
+			Instance HTMLCollection má několik užitečných vlastností:<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;instance&gt;.elements - pole elementů jež kolekce obsahuje<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;instance&gt;.length - počet elementů jež kolekce obsahuje<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;instance&gt;.debug - obsahuje textovou reprezentaci obsahu kolekce; generuje se jen pokud je JAX.DEBUG == true<br>
+		</p>
+
+		<h3 id="htmlcollection_push">JAX.HTMLCollection.prototype.push( ... )</h3>
+		<p>
+			Vloží do kolekce elementy jež jsou zadány jako jednotlivé argumenty.
+		</p>
+		<h4>Příklad</h4>
+		<div class="example">
+			collection.push( element, element2 )
+		</div>
+
+		<h3 id="htmlcollection_pop">JAX.HTMLCollection.prototype.pop( )</h3>
+		<p>
+			Vyjme z kolekce poslední element a vrátí jej.
+		</p>
+
+		<h3 id="htmlcollection_shift">JAX.HTMLCollection.prototype.shift( )</h3>
+		<p>
+			Vyjme z kolekce první element a vrátí jej.
+		</p>
+
+		<h3 id="htmlcollection_slice">JAX.HTMLCollection.prototype.slice( startIndex [, end ] )</h3>
+		<p>
+			Vrací "výřez" z kolekce. Výřez je nová JAX.HTMLCollection. Původní kolekce zůstává nezměněna.
+		</p>
+
+		<h3 id="htmlcollection_splice">JAX.HTMLCollection.prototype.splice( startIndex [, count] )</h3>
+		<p>
+			Vyjme "výřez" (odkud - <b>startIndex</b> a kolik - <b>count</b>) z kolekce a vrátí jej. Výřez je nová JAX.HTMLCollection. Původní kolekce se změní.
+		</p>
+
+
+
+
+
+
+		<br/><br/>
+		<br/><br/>
+		<span>JAX != jQuery (jQuery je oproti JAXu sračka)</span><br/>
+		<em>Josef Vanžura 2011</em>
+	</div>
+</div>
+</body></html>

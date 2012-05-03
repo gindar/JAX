@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jax test</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<script src="../deps/jak.js"></script>
+		<script src="../deps/timekeeper.js"></script>
+		<script src="../deps/interpolator.js"></script>
+		<script src="../src/core.js"></script>
+		<script src="../src/dom.js"></script>
+		<script src="../src/element.js"></script>
+		<script src="../src/deco.js"></script>
+		<script src="../src/fx.js"></script>
+		<script src="../src/dombuilder.js"></script>
+	</head>
+	<body>
+		<style>
+			body,html {background:#000; color:#fff; }
+			.cls {background:#666;  border:solid #555 2px; margin:100px; text-align:center; padding:10px;}
+		</style>
+		elm.delay(1000).hide(500).delay(1000).show(500).delay(1000).hide(500).delay(1000).show(500)
+		<div id="boxx"></div>
+		<script>
+			data = [
+			    { "name": "Hynek", "sex": "muž", "prsa": false },
+			    { "name": "Jarmila", "sex": "žena", "prsa": true },
+			    { "name": "Vilém", "sex": "muž", "prsa": false }
+			]
+
+			template = '<div class="{:first}{:last}">{:number}. Jméno:{name} ({sex}) {:index} {:if prsa}Má prsa{/}</div>'
+
+			var dom = new JAX.DOMBuilder();
+			dom.addBox("div.trida1");
+				dom.addTemplate( template, data );
+			dom.endBox();
+			dom.appendTo(JAX.$("#boxx",0,1));
+
+			_locks = [];
+			var dom = new JAX.DOMBuilder();
+
+			elm = dom.addBox("div.cls",{html:"Život je jen zasraně dlouhá cesta ke smrti."});
+				dom.add("img",{src:"sklik_loading.gif"});
+			dom.endBox();
+			
+			elm.addClass("xxx")
+
+			elm.delay(1000).hide(500).delay(1000).show(500).delay(1000).hide(500).delay(1000).show(500)
+			dom.appendTo(JAX.$("#boxx",0,1));
+			
+			
+			sss = function(){};
+			sss.prototype.sss = function(){};
+			
+			aaa = {
+				"xxxx": new sss(),
+				"ssss": [1,2,3]
+			}
+			
+			console.log( JAX.copy(aaa) );
+			
+			
+
+		</script>
+	</body>
+</html>
