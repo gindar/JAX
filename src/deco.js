@@ -141,7 +141,7 @@ JAX.RegisterDecor("addClass", JAX.METHOD_BOTH, function(){
 		}
 		cls = cls.join(" ");
 	}
-	this.className = (( this.className == "" )?"":" ")+cls;
+	this.className += (( this.className == "" )?"":" ")+cls;
 	return this;
 })
 
@@ -151,7 +151,7 @@ JAX.RegisterDecor("removeClass", JAX.METHOD_BOTH, function(){
 	var names = this.className.split(" ");
 	var newClassArr = [];
 	for (var i=0;i<names.length;i++) {
-		if ( arguments.indexOf(names[i].toLowerCase()) == -1 ) {
+		if ( Array.indexOf(arguments,names[i]) == -1 ) {
 			newClassArr.push(names[i]);
 		}
 	}
