@@ -1,0 +1,66 @@
+# Created with CodeGrinder by Gindar <gindar@zamraky.cz>
+@page dom
+@lang javascript
+
+@name dom
+@description Some description of page
+@prefix 
+
+@def JAX.make(q, attrs, doc=document, nodecor=false )
+	Funkce vytvoří element dle zadané "CSS query" *def*. Elementu je možno nastavit
+	další vlastnosti *attrs* (jde od asoc. pole). Dále je možné určit dokument (*doc*) v jehož kontextu
+	se element vytvoří.<br>
+	Pokud je *nodecor* true pak nebude vytvořený element automaticky odekorován.
+	
+	<h4>Příklad</h4>
+	@example
+		JAX.make( "div.trida1.trida2" )// vystupem je <div class="trida1 trida2"/>
+		JAX.make( "div#idecko.trida1" )// vystupem je <div id="idecko" class="trida1"/>
+		JAX.make( "div", { "title": "Popis" } )// vystupem je <div title="Popis" alt="Popis"/>
+
+	<h4>Seznam možných vlastností (attrs)</h4>
+	<table>
+		<tr>
+			<th>Název</th>
+			<th>Hodnota</th>
+			<th>Co dělá</th>
+		</tr>
+		<tr><td>html</td><td>HTML</td><td>Vloží do elementu html (zkratka pro innerHTML)</td></tr>
+		<tr><td>addhtml</td><td>HTML</td><td>Přidá do elementu html (zkratka pro innerHTML+=...)</td></tr>
+		<tr><td>position</td><td>abs/rel/relative/absolute</td><td>nastavuje style.position</td></tr>
+		<tr><td>width</td><td>číslo (1) nebo string ("1px")</td><td>nastavuje style.width (pokud je zadáno číslo použijí se PX)</td></tr>
+		<tr><td>height</td><td>číslo (1) nebo string ("1px")</td><td>nastavuje style.height (pokud je zadáno číslo použijí se PX)</td></tr>
+		<tr><td>left</td><td>číslo (1) nebo string ("1px")</td><td>nastavuje style.left (pokud je zadáno číslo použijí se PX)</td></tr>
+		<tr><td>top</td><td>číslo (1) nebo string ("1px")</td><td>nastavuje style.top (pokud je zadáno číslo použijí se PX)</td></tr>
+		<tr><td>style</td><td>asoc. pole</td><td>nastaví elementu style dle obsahu pole Např.: {"color":"#F00","zIndex":120}</td></tr>
+	</table>
+	<br/>
+	<b>Dále je mozno zadat různé události viz JAX._elmEvents</b><br/>
+	<br/>
+	<b>A teoreticky jakoukoli jinou vlastnost elementu.</b>
+	Např.: target, href, name, src ...<br>
+
+	<h4>Příklad</h4>
+	@example
+		JAX.make( "div", { "click": function(e, elm){ ... } } );
+		JAX.make( "div", { "width": "160px" } );
+		JAX.make( "a", { "href": "/path/to" } );
+		JAX.make( "img", { "src": "naha_baba.png" } );
+
+
+@def JAX.mmake(q, number, func, doc, nodecor)
+	@undocumented
+
+@def JAX.modify(elm, attrs)
+	@undocumented
+
+@def JAX.query(query, context)
+	@undocumented
+
+@def JAX.OffScreenMeter(elm, meterindom)
+	Změří rozměry elementu bez nutnosti jeho appendování do dokumentu. Fce funguje tak, že vytvoří kopii elementu a vloží ji jako první element v body, poté se "přečtou" hodnoty offsetWidth a offsetHeight.<br>
+	Vrací: {width:#,height:#}<br/>
+	<br/>
+	@note
+		Verze 1.15: Pokud je zadán volitelný argument *meterindom* pak se vytvořená kopie elementu nevkládá jako první element v body, ale před stávajicí element - tudíže lze takto měřit jen elementy již vložené do dokumentu (neplatí tedy první věta dokumentace této fce). Výhodou je, že na element jsou aplikována CSS pravidla odpovídajicí jeho umístění v dokumentu.
+

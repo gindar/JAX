@@ -1,0 +1,10 @@
+# Created with CodeGrinder by Gindar <gindar@zamraky.cz>
+@page deco
+@lang javascript
+
+@name deco
+@description Some description of page
+@prefix deco.
+
+@def var_endcallback()
+	@undocumented

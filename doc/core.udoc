@@ -1,0 +1,57 @@
+# Created with CodeGrinder by Gindar <gindar@zamraky.cz>
+@page core
+@lang javascript
+
+@name Obecné
+@description Co se jinam nevešlo
+@prefix 
+
+@def JAX.makeClass(NAME, EXTEND=null)
+	Obalení JAK.ClassMaker.makeClass. <b>NAME</b> je string s názvem třídy a <b>EXTEND</b> je případná třída z níž se bude dědit.
+	@example
+		Trida = JAX.makeClass( "Trida" )
+		Trida = JAX.makeClass( "Trida", TridaZNizDedim )
+
+@def JAX.copy(obj)
+	Rekurzivně projde *obj* a vytvoří "identickou" kopii.<br>
+	Lze kopírovat tyto "datové typy":
+	@example
+		String
+		Number
+		Array
+		Object - ve smysli asociativního pole
+		Date
+	
+	Nelze kopírovat funkce.
+	@example
+		JAX.copy({
+			"key": "value",
+			"list": [1,2,3]
+		})
+		=> vrací kopii tohoto objektu
+	@warning
+		Pozor na cirkulární referenci - není ošetřeno, zatím.
+
+@section Delay & Interval
+
+@class JAX.Delay(func, time)
+	Jednoduchý obal nad setTimeout umožňující předání argumentů či zastavení časovače. *time* je v milisekundách, *func* je libovolná funkce (ne string).
+	@warning
+		Oproti funkci setTimeout nemůže být v parametru *func* předán string, pouze funkce.
+	@example
+		function funkce1( a1, a2 ){ ... }
+		// po uplynutí 200ms zavolá fci funkce1 s argumenty "x", "y"
+		var timer = new JAX.Delay( funkce1, 200, "x", "y" );
+		timer.stop() // ... nezavolá jelikož jsme časovač zrušili
+
+	@def stop()
+		Zastaví časovač.
+
+@class JAX.Interval(func, time)
+	Jednoduchý obal nad setInterval umožňující předání argumentů či zastavení časovače.
+	Třída je skoro stejná jako [JAX.Delay] a má stejná omezení co se týče *func*.
+	@example
+		var timer = new JAX.Interval( funkce1, 200, "x", "y" );
+
+	@def stop()
+		Zastaví časovač.

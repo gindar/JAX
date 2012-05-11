@@ -1,0 +1,52 @@
+# Created with CodeGrinder by Gindar <gindar@zamraky.cz>
+@page element
+@lang javascript
+
+@name Elementy & Kolekce
+@description Získávání elementu a kolekce elementů
+@prefix 
+
+@def JAX.$(query, context, single)
+	@undocumented
+
+@def JAX.$$(elm_id)
+	@undocumented
+
+@def JAX.DecorateElement(elm, recursive)
+	@undocumented
+
+@class JAX.HTMLCollection(elms)
+	Toto je třída jež uchovává seznam elementů a stará se o hromadné volání
+	<a href="deco.html">metod elementu</a>. Při vytvoření kolekce se všechny její
+	prvky odekorují.<br>
+	@note
+		Instance HTMLCollection má několik užitečných vlastností:
+		elements - pole elementů jež kolekce obsahuje
+		length - počet elementů jež kolekce obsahuje
+		debug - obsahuje textovou reprezentaci obsahu kolekce; generuje se jen pokud je JAX.DEBUG == true
+
+	@def push()
+		Vloží do kolekce elementy jež jsou zadány jako jednotlivé argumenty.
+		@example
+			collection.push( element, element2 )
+
+	@def slice(start, end=null)
+		Vrací "výřez" z kolekce. Výřez je nová [JAX.HTMLCollection]. Původní kolekce zůstává nezměněna.
+
+	@def splice(start, count=null)
+		Vyjme "výřez" (odkud - *startIndex* a kolik - *count*) z kolekce a vrátí jej. Výřez je nová [JAX.HTMLCollection]. <b>Původní kolekce se změní.</b>
+
+	@def pop()
+		Vyjme z kolekce poslední element a vrátí jej.
+
+	@def shift()
+		Vyjme z kolekce první element a vrátí jej.
+
+	@def setAttr(attr, value)
+		Nastavuje hromadně všem elementům libovolný atribut *attr*
+
+	@def process(method, args)
+		Volá na všech obsažených elementech metodu *method* jíž jsou předány argumenty *args*.
+
+@def JAX.RegisterDecor(method, applies_to, func)
+	@undocumented

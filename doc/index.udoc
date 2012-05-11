@@ -1,0 +1,14 @@
+# Created with CodeGrinder by Gindar <gindar@zamraky.cz>
+@page index
+@lang udoc
+
+@name Index
+
+@section List of pages
+<ul>
+	<li>![core]!</li>
+	<li>![deco]!</li>
+	<li>![dombuilder]!</li>
+	<li>![dom]!</li>
+	<li>![element]!</li>
+</ul>
