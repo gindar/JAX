@@ -167,6 +167,9 @@ JAX.RegisterDecor("hasClass", JAX.METHOD_SINGLE, function( cls ){
 // Navesi na element posluchace udalosti
 JAX.RegisterDecor("event", JAX.METHOD_BOTH, function(type,method,obj){
 	if(this._lockCheck("event",arguments)) return this;
+	var method = method||null;
+	if( !method ) return false;
+
 	if( obj && typeof(method) == "string" ){method = obj[method].bind(obj);};
 	if( method && typeof(obj) == "string" ){method = method[obj].bind(method);};
 	if(typeof(this.__event_def[type]) == "undefined"){this.__event_def[type] = [];};
@@ -177,26 +180,20 @@ JAX.RegisterDecor("event", JAX.METHOD_BOTH, function(type,method,obj){
 	}
 
 	this.__event_def[type].push([ method, args ]);
-
-	var listener = JAK.Events.addListener(this,type,this,"_eventCallback");
+	if( args.length == 0 ){
+		var listener = JAK.Events.addListener( this, type, method );
+	} else {
+		_tmpfunction = function(e,elm){
+			var baseArguments = [e,elm];
+			for( var a = 0; a < args.length; a ++ ){
+				baseArguments.push(args[a]);
+			}
+			method.apply( window, baseArguments );
+		}
+		var listener = JAK.Events.addListener( this, type, _tmpfunction );
+	}
 	this.storeValue("elm.event_"+type,listener);
 	return listener;
-})
-
-// Privatni metoda
-JAX.RegisterDecor("_eventCallback", JAX.METHOD_SINGLE, function(e,elm){
-	var df = null;
-	var baseArguments = null;
-	if(typeof(this.__event_def[e.type]) != "undefined"){
-		for(var i = 0; i < this.__event_def[e.type].length; i ++){
-			df = this.__event_def[e.type][i];
-			baseArguments = [e,elm];
-			for( var a = 0; a < df[1].length; a ++ ){
-				baseArguments.push(df[1][a]);
-			}
-			df[0].apply(window,baseArguments);
-		}
-	}
 })
 
 // Odstrani zadany typ posluchace

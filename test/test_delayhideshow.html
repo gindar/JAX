@@ -21,6 +21,19 @@
 		elm.delay(1000).hide(500).delay(1000).show(500).delay(1000).hide(500).delay(1000).show(500)
 		<div id="boxx"></div>
 		<script>
+
+			function a ( e, elm, q,x ){
+				alert("a/"+q+"/"+x)
+
+				JAK.Events.cancelDef(e);
+				JAK.Events.stopEvent(e)
+
+			}
+
+			JAX.$("#boxx").event( "click", a, null, "a", "b" )
+			JAX.$("#boxx").event( "click", a, null, "c", "d" )
+
+
 			data = [
 			    { "name": "Hynek", "sex": "muž", "prsa": false },
 			    { "name": "Jarmila", "sex": "žena", "prsa": true },
@@ -41,24 +54,24 @@
 			elm = dom.addBox("div.cls",{html:"Život je jen zasraně dlouhá cesta ke smrti."});
 				dom.add("img",{src:"sklik_loading.gif"});
 			dom.endBox();
-			
+
 			elm.addClass("xxx")
 
 			elm.delay(1000).hide(500).delay(1000).show(500).delay(1000).hide(500).delay(1000).show(500)
 			dom.appendTo(JAX.$("#boxx",0,1));
-			
-			
+
+
 			sss = function(){};
 			sss.prototype.sss = function(){};
-			
+
 			aaa = {
 				"xxxx": new sss(),
 				"ssss": [1,2,3]
 			}
-			
+
 			console.log( JAX.copy(aaa) );
-			
-			
+
+
 
 		</script>
 	</body>
