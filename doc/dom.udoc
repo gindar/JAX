@@ -2,16 +2,16 @@
 @page dom
 @lang javascript
 
-@name dom
-@description Some description of page
-@prefix 
+@name Práce s DOMem
+@description Funkce pro tvorbu elementů, jejich úpravu, získání atd.
+@prefix
 
 @def JAX.make(q, attrs, doc=document, nodecor=false )
 	Funkce vytvoří element dle zadané "CSS query" *def*. Elementu je možno nastavit
 	další vlastnosti *attrs* (jde od asoc. pole). Dále je možné určit dokument (*doc*) v jehož kontextu
 	se element vytvoří.<br>
 	Pokud je *nodecor* true pak nebude vytvořený element automaticky odekorován.
-	
+
 	<h4>Příklad</h4>
 	@example
 		JAX.make( "div.trida1.trida2" )// vystupem je <div class="trida1 trida2"/>

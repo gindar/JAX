@@ -4,20 +4,29 @@
 
 @name Elementy & Kolekce
 @description Získávání elementu a kolekce elementů
-@prefix 
+@prefix
 
-@def JAX.$(query, context, single)
-	@undocumented
+@def JAX.$(query, context=document, single=false)
+	Tato funkce vyhledá v aktuálním dokumentu ( nebo v rámci nějakého
+	elementu *context* ) elementy vyhovující zadané CSS1 *query*.
+	<br>
+	Vrací [JAX.HTMLCollection]. Pokud je *single* == true pak vrací pouze jeden ( první ) element.
+
+	@example
+		JAX.$( "div#box div a.link" )
+		JAX.$( "div a, span a, ul li a" )
+		JAX.$( "#idecko", false, true ) => jeden element
+
+
 
 @def JAX.$$(elm_id)
-	@undocumented
-
-@def JAX.DecorateElement(elm, recursive)
-	@undocumented
+	Najde element s id == *elm_id* a odekoruje jej. Místo ID lze
+	předat objekt HTMLElement. Funkce vrací odekorovaný element nebo null pokud
+	element nenajde dle ID.
 
 @class JAX.HTMLCollection(elms)
 	Toto je třída jež uchovává seznam elementů a stará se o hromadné volání
-	<a href="deco.html">metod elementu</a>. Při vytvoření kolekce se všechny její
+	metod elementu. Při vytvoření kolekce se všechny její
 	prvky odekorují.<br>
 	@note
 		Instance HTMLCollection má několik užitečných vlastností:
@@ -48,5 +57,3 @@
 	@def process(method, args)
 		Volá na všech obsažených elementech metodu *method* jíž jsou předány argumenty *args*.
 
-@def JAX.RegisterDecor(method, applies_to, func)
-	@undocumented
