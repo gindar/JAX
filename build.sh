@@ -20,7 +20,7 @@ echo "JAX.version='$VERSION-alldeps';" >> build/jax-all.js
 echo "JAX.version='$VERSION-sa';" >> build/jaxsa.js
 
 if [ "$1" = "release" ]; then
-	zip build/jax-$VERSION.zip deps/*.js test/* doc/* build/jax.js build/jax-all.js build/jaxsa.js README.md
+	zip build/jax-$VERSION.zip deps/*.js test/* doc/*.html build/jax.js build/jax-all.js build/jaxsa.js README.md
 fi
 
 if [ "$1" = "devel" ]; then
