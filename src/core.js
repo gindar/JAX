@@ -17,8 +17,32 @@ JAX.makeClass = function( NAME, EXTEND ){
 	if( !!EXTEND ){
 		obj.EXTEND = EXTEND;
 	}
-	return JAK.ClassMaker.makeClass(obj);
+
+	var instance = JAK.ClassMaker.makeClass(obj);
+	instance.__JAXClass = true;
+	return instance;
 }
+
+JAX.IEvents = JAX.makeClass("JAX.IEvents");
+JAX.IEvents.prototype.__listeners = {};
+
+JAX.IEvents.prototype.listen = function( event, callback ){
+	if( !(event in this.__listeners) ){
+		this.__listeners[event] = [];
+	}
+	this.__listeners[event].push( callback );
+}
+
+JAX.IEvents.prototype.event = function( event, element ){
+	if( event in this.__listeners ){
+		for( var i = 0; i < this.__listeners[event].length; i ++ ){
+			//this.__listeners[event][i]( element||null );
+			new JAX.Delay( this.__listeners[event][i], 0, element||null );
+		}
+	}
+}
+
+
 
 JAX.hash = function(value){
 	var result = 0;
@@ -56,6 +80,15 @@ JAX.copy = function( obj ){
 	} else {
 		return obj;
 	}
+}
+
+JAX.updateObject = function( updated, newer ){
+	var newer = JAX.copy(newer);
+	var updated = JAX.copy(updated);
+	for( var key in newer ){
+		updated[key] = newer[key];
+	}
+	return updated;
 }
 
 JAX.Delay = function(func,time){
