@@ -247,6 +247,16 @@ JAX.RegisterDecor("remove", JAX.METHOD_BOTH, function(anim){
 	return this;
 });
 
+// Odstrani element vsechny jeho potomky
+JAX.RegisterDecor("removeNodes", JAX.METHOD_BOTH, function(query){
+	if(this._lockCheck("removeNodes",arguments)) return this;
+	var elms = JAX.query( query, this );
+	for( var i = 0; i < elms.length; i ++ ){
+		this.removeChild( elms[i] );
+	}
+	return this;
+});
+
 // Privatni metoda
 JAX.RegisterDecor("_remove", JAX.METHOD_BOTH, function(){
 	this.parentNode.removeChild(this);

@@ -8,13 +8,14 @@
 
 @def JAX.$(query, context=document, single=false)
 	Tato funkce vyhledá v aktuálním dokumentu ( nebo v rámci nějakého
-	elementu *context* ) elementy vyhovující zadané CSS1 *query*.
+	elementu *context* ) elementy vyhovující zadané CSS1 *query*. Využívá funkci [JAX.query].
 	<br>
 	Vrací [JAX.HTMLCollection]. Pokud je *single* == true pak vrací pouze jeden ( první ) element.
 
 	@example
 		JAX.$( "div#box div a.link" )
 		JAX.$( "div a, span a, ul li a" )
+		JAX.$( "div *" ) => vsechny potomky vsech divu
 		JAX.$( "#idecko", false, true ) => jeden element
 
 

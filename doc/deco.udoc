@@ -145,6 +145,8 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 
 
+@def listen( type, callback_obj, callback_method )
+	alias pro [element.event]
 @def event( type, callback_obj, callback_method )
 	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
 	<p>
@@ -211,6 +213,17 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 		Pokud je zadán čas v ms <b>time</b> pak se odstranění elementu animuje
 		(opacity 1.0-0.0).
 	</p>
+
+@def removeNodes( query )
+	@note
+		Novinka ve verzi 1.17.
+	Odstraní potomky elementu filtrované dle zadané *query*.
+
+	@example
+		JAX.$(".someclass").removeNodes( "div" ) // odstrani vsechny potomky <div>
+		JAX.$(".someclass").removeNodes( ".classname" ) // odtrani vsechny potomky se tridou .classname
+		JAX.$(".someclass").removeNodes( "div.classname *" ) // odstrani vsechny potomky divů se tridou classname
+		JAX.$(".someclass").removeNodes( "*" ) // odstrani vsechny potomky
 
 @def storeValue( key, value )
 	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>

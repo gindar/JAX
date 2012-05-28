@@ -137,6 +137,7 @@ JAX._query_checkElm = function(elm,ob,index,count){
 			if((" "+elm.className+" ").indexOf(" "+ob.className[c]+" ") == -1) return false;
 		}
 	}
+	if(ob.tag == "*"){ return true; };
 	if(ob.tag && elm.tagName.toLowerCase() != ob.tag.toLowerCase()) return false;
 	if(ob.id != ""){
 		if( typeof(elm.id) == "string" ){
