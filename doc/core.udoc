@@ -4,7 +4,7 @@
 
 @name Obecné
 @description Co se jinam nevešlo
-@prefix 
+@prefix
 
 @def JAX.makeClass(NAME, EXTEND=null)
 	Obalení JAK.ClassMaker.makeClass. <b>NAME</b> je string s názvem třídy a <b>EXTEND</b> je případná třída z níž se bude dědit.
@@ -19,9 +19,9 @@
 		String
 		Number
 		Array
-		Object - ve smysli asociativního pole
+		Object - asociativní pole
 		Date
-	
+
 	Nelze kopírovat funkce.
 	@example
 		JAX.copy({
