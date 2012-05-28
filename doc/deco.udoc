@@ -16,7 +16,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 @def animate( time, what, start, end, method="LINEAR", endcallback=null )
 	@note
 		Tato metoda zamyká element.
-	@note
+	@warning
 		Tato metoda vyžaduje JAK.CSSInterpolator. Soubor jax-all.js obsahuje vždy funkční verzi.
 	<p>
 		Metoda slouží k animaci CSS vlastností. Je třeba zadat *time* v
@@ -66,10 +66,10 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 
 @def delay( time )
-	<div class="note">Tato metoda <a href="#element_locking">zamyká element</a>.</div>
+	<div class="note">Tato metoda <a href="#section1">zamyká element</a>.</div>
 	<p>
 		Na zadaný čas <b>time</b> "zamkne" volání dalších metod. Neovlivňuje
-		další delay nebo metodu <a href="#element_animate">element.animate</a>.
+		další delay nebo metodu [element.animate].
 	</p>
 	<h4>Příklad</h4>
 	<div class="example">
@@ -80,7 +80,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 
 @def callFunction( func )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
 		Volá zadanou funkci <b>func</b> s argumentem elm jež se rovná danému elementu.
 	</p>
@@ -93,9 +93,9 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 
 @def addElement( def, attrs )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
-		Metoda vytvoří potomka daného elementu dle zadaných parametrů. Více u <a href="other.html#jaxmake">JAX.make</a>.
+		Metoda vytvoří potomka daného elementu dle zadaných parametrů. Více u [JAX.make].
 	</p>
 	<h4>Příklad</h4>
 	<div class="example">
@@ -105,9 +105,9 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 
 @def nextNode( query )
-	<div class="note">Tato metoda se nedá použít pro <a href="collections.html#htmlcollection">kolekci</a>.</div>
+	<div class="note">Tato metoda se nedá použít pro [JAX.HTMLCollection].</div>
 	<p>
-		Metoda hledá nejbližší element za aktuálním elementem vyhovující zadané <a href="collections.html">query</a>.
+		Metoda hledá nejbližší element za aktuálním elementem vyhovující zadané *query*.
 	</p>
 	<h4>Příklad</h4>
 	<div class="example">
@@ -116,28 +116,28 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 	</div>
 
 @def prevNode( query )
-	<div class="note">Tato metoda se nedá použít pro <a href="#htmlcollection">kolekci</a>.</div>
+	<div class="note">Tato metoda se nedá použít pro [JAX.HTMLCollection].</div>
 	<p>
-		Stejná metoda jako <a href="#element_nextnode">element.nextNode</a> jen hledá před elementem.
+		Stejná metoda jako [element.nextNode] jen hledá před elementem.
 	</p>
 
 
 @def addClass( cls, ... )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
 		Přidá elementu třídu <b>cls</b>.
 	</p>
 	<div class="note">Od verze 1.15 lze předat libovolný počet argumentů. Všechny zadané třídy budou přidány.</div>
 
 @def removeClass( cls, ... )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
 		Odebere elementu třídu <b>cls</b>.
 	</p>
 	<div class="note">Od verze 1.15 lze předat libovolný počet argumentů. Všechny zadané třídy budou odstraněny.</div>
 
 @def hasClass( cls )
-	<div class="note">Tato metoda se nedá použít pro <a href="#htmlcollection">kolekci</a>.</div>
+	<div class="note">Tato metoda se nedá použít pro [JAX.HTMLCollection].</div>
 	<p>
 		Vrací true pokud má element třídu <b>cls</b>.
 	</p>
@@ -148,7 +148,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 @def listen( type, callback_obj, callback_method )
 	alias pro [element.event]
 @def event( type, callback_obj, callback_method )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
 		Navěsí na element posluchač události <b>type</b>. <br>
 		Callback lze zadat dvěma způsoby:<br>
@@ -170,7 +170,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 	</div>
 
 @def removeEvent( type )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
 		Odstraní posluchače daného typu <b>type</b> události.
 	</p>
@@ -185,9 +185,9 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 
 @def modify( attrs )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
-		Změni element pomocí fce <a href="#jaxmodify">JAX.modify</a>.
+		Změni element pomocí fce [JAX.modify].
 	</p>
 	<h4>Příklad</h4>
 	<div class="example">
@@ -197,7 +197,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 
 @def append( elements , time=0 )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
 		Appenduje do elementu prvky z pole <b>elements</b>. Místo pole lze
 		zadat jen jeden prvek, pak funguje jako klasický appendChild.<br>
@@ -207,7 +207,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 
 @def remove( time=0 )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
 		Odstraní element ze svého rodiče.<br>
 		Pokud je zadán čas v ms <b>time</b> pak se odstranění elementu animuje
@@ -226,26 +226,26 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 		JAX.$(".someclass").removeNodes( "*" ) // odstrani vsechny potomky
 
 @def storeValue( key, value )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
 		Uloží do vlastnosti elementu hodnotu <b>value</b> pod zadaný klíč <b>key</b>. Hodnota může být cokoli.
 	</p>
 
 @def restoreValue( key, default_value=null )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
-	<div class="note">Tato metoda se nedá použít pro <a href="#htmlcollection">kolekci</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
+	<div class="note">Tato metoda se nedá použít pro [JAX.HTMLCollection].</div>
 	<p>
 		Vrací uloženou hodnotu podle daného klíče <b>key</b>. Pokud není klíč nalezen vrací <b>default_value</b>.
 	</p>
 
 @def toggle( [ time ] )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
 		Přepíná zobrazení elementu. Parametr <b>time</b> slouží k animaci. Využívá element.show/hide více tam.
 	</p>
 
 @def show( time=0, target_opacity=1.0, inline=false )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
 		Zobrazí element - nastaví .style.display na "block" nebo ( pokud je argument inline == true ) na "inline".<br>
 		Pokud je zadán argument <b>time</b> pak se zobrazení animuje ( opacity 0.0 - 1.0 ), lze nastavit maximální
@@ -253,15 +253,15 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 	</p>
 
 @def hide( time=0 )
-	<div class="note">Tato metoda může být blokována <a href="#element_locking">zámkem</a>.</div>
+	<div class="note">Tato metoda může být blokována <a href="#section1">zámkem</a>.</div>
 	<p>
-		Funguje přesně opačně než <a href="#element_show">element.show</a>.
+		Funguje přesně opačně než [element.show].
 	</p>
 
 @def getRect( meter_in_dom=false )
 	<p>
 		Tato metoda vrací objekt obsahujicí informace o poloze a velikosti elementu. Je-li volitelný argument
-		<b>meter_in_dom</b> == true pak se bude velikost elementu měřit v místě kde je - budou na něj aplikována CSS pravidla z rodiče. Více informací u <a href="#jax_offscreenmeter">JAX.OffScreenMeter</a>.
+		<b>meter_in_dom</b> == true pak se bude velikost elementu měřit v místě kde je - budou na něj aplikována CSS pravidla z rodiče. Více informací u [JAX.OffScreenMeter].
 	</p>
 	<div class="example">
 		element.getRect() =&gt; {<br/>
@@ -281,16 +281,16 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 	<br>
 	Toto zamykání dělají metody:
 	<ul>
-		<li><a href="#element_animate">element.animate</a></li>
-		<li><a href="#element_delay">element.delay</a></li>
+		<li>[element.animate]</li>
+		<li>[element.delay]</li>
 	</ul>
 	A tyto metody zamykají pokud je u nich použita animace průhlednosti:
 	<ul>
-		<li><a href="#element_show">element.show</a></li>
-		<li><a href="#element_hide">element.hide</a></li>
-		<li><a href="#element_toggle">element.toggle</a></li>
-		<li><a href="#element_append">element.append</a></li>
-		<li><a href="#element_remove">element.remove</a></li>
+		<li>[element.show]</li>
+		<li>[element.hide]</li>
+		<li>[element.toggle]</li>
+		<li>[element.append]</li>
+		<li>[element.remove]</li>
 	</ul>
 </p>
 <h4>Příklad</h4>
