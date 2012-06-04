@@ -40,7 +40,7 @@
 		K tomu slouží vlastnost .decorating, která je defaultně true.
 		
 
-	@def addBox(def, attrs=null)
+	@def addBox(def, attrs=)
 		Metoda je shodná s [add] s tím rozdílem, že
 		vytvořený element je kontejnerem a další vložené elementy budou potomky tohoto elementu.
 		<b>Argumenty jsou shodné s [add].</b>

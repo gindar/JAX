@@ -1,0 +1,56 @@
+
+body,html { font-size:14px; color:#000; background:#fff; font-family:sans-serif; margin:0px; padding:0px; }
+h1{ background: #273d4e; font-size:22px; color:#fff; margin:0px; padding: 10px 20px; }
+
+.leftbox { width: 240px; background: #273d4e; color:#fff; height:100%; position:fixed; overflow:hidden; overflow-y:auto; }
+.leftbox-inner { padding:0px 10px; width:200px; overflow-x:hidden; }
+
+.leftbox h3{ color:#fff; font-size:18px; font-weight:bold; margin: 15px 0px 2px 0px; }
+
+.leftbox a { color:#b7d1e6; font-weight:normal; text-decoration:none; }
+.leftbox a:hover { color:#8abee6; font-weight:normal; text-decoration:underline; }
+.leftbox ul { padding:0px; margin:0px; }
+.leftbox ul ul { padding:0px; margin:0px; padding-left:15px; border-left: solid #416682 2px; }
+.leftbox ul li { padding:2px 0px; margin:0px; list-style:none; }
+.leftbox ul li .toc_method{ margin-left:20px; font-size:12px; }
+.leftbox ul li .toc_section{ font-size:16px; border-bottom: solid #b7d1e6 1px; }
+.leftbox ul li a.selected { color:#fff; font-weight:bold; }
+.leftbox ul li a.selected:hover{ color:#fff; font-weight:bold; }
+.leftbox ul li a.selectedfile { color:#fff; font-weight:bold; }
+.leftbox ul li a.selectedfile:hover{ color:#fff; font-weight:bold; }
+
+.content { margin-left:240px; }
+.content-inner { padding:20px; }
+
+.content a  { color:#406480; text-decoration:none; font-weight:bold; }
+.content a:hover { color:#335066; text-decoration:underline; }
+
+.content h2 { border-radius: 2px; text-shadow: 0px 1px 0px #ffd; font-size:20px; font-weight:bold; padding:6px; background: #edb; color:#000; border:solid #aaa 1px; margin: 15px 0px 10px 0px; }
+
+.content h3 { border-radius: 2px; text-shadow: 0px 1px 0px #ffd; background: #edb; margin: 30px 0px 5px 0px; font-size:15px; font-weight:normal; font-family:monospace; color:#000; border:solid #aaa 1px; padding:6px; }
+.content h3 .methodclass{ color:#000; text-decoration:none; font-weight:normal; border-bottom:dashed #406480 1px; }
+.content h3 .name{ font-size:18px; font-weight:bold; color:#000; }
+.content h3 .type{ color:#000; }
+.content h3 .arg { font-weight:normal; }
+.content h3 .arg .optional { color:#666; font-size:14px; }
+.content h3 .arg .optional .string { color:#040; }
+.content h3 .arg .optional .bool { color:#400; }
+
+.content .example { margin: 10px 0px 5px 0px; font-family:monospace; font-size:14px; background:#d9efff; border:solid #85b1d2 1px; padding:5px 10px; }
+.content .note { margin: 10px 0px 5px 0px; font-family:monospace; font-size:14px; background:#ebebeb; border:solid #aaaaaa 1px; padding:5px 10px; }
+.content .warning { margin: 10px 0px 5px 0px; font-family:monospace; font-size:14px; background:#ffded9; border:solid #d28f85 1px; padding:5px 10px; }
+.content .box_method { margin-left:40px; }
+.content .extends { font-weight:bold; margin-left:40px; }
+.content .extends .extnames { font-weight:normal; font-variant:italics; }
+.content .box_desc { margin-left:40px; }
+.content .box_desc .arg { font-family:monospace; font-size:14px; font-weight:bold;  background:#f0f0ff; }
+.content .box_desc a.funclink { background:#f0f0ff; font-family:monospace; font-size:14px; font-weight:bold;  }
+.content .box_desc span.modlink { font-size:14px; }
+.content .box_desc span.modlink a { background:#f0f0ff; font-family:monospace; font-size:14px; font-weight:bold;  }
+.content .box_desc p { margin:10px 0px 5px 0px; padding:1px; }
+
+.content .box_base .box_desc { margin-left:0px; }
+
+h3.selected,h2.selected{ background:#ffd; }
+a.indexlink { float: right; display:block; padding: 10px 20px; color:#fff; }
+a.indexlink:hover {  color:#fff; }
