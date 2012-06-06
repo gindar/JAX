@@ -18,27 +18,21 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 		Tato metoda <a href="#section1">zamyká element</a>.
 	@warning
 		Tato metoda vyžaduje JAK.CSSInterpolator. Soubor jax-all.js obsahuje vždy funkční verzi.
-	<p>
-		Metoda slouží k animaci CSS vlastností. Je třeba zadat *time* v
-		milisekundách a co se bude animovat *what* (viz níže). Další
-		potřebnou informací je v jakém rozsahu hodnot animace proběhne *start* - *end*.
-	</p>
-	<p>
-		Parametry *start* a *end* je vhodné zadávat i s jednotkou ( např.: "100px", "20%" ) nebo ve vhodném formátu ( color: "#ff0000" ).
-		U některých délkových vlastností se jednotka nemusí uvádět a pak se použije "px". ( které to jsou lze zjistit v poli JAX._animatePXUnits )
-		Pokud je parametr *start* zadán jako <i>null</i> pak se zkouší najít hodnota nastavená na elementu (pomocí JAK.DOM.getStyle ) - používat s rozvahou.
-	</p>
-
-	<h4>Příklady animovatelných vlastností</h4>
-	<table>
-		<tr><th width="200">vlastnost</th><th>hodnoty</th></tr>
-		<tr><td>width</td><td>"100px", "200px"</td></tr>
-		<tr><td>opacity</td><td>0.0, 1.0</td></tr>
-		<tr><td>backgroundColor</td><td>"#000000", "#ff0000"</td></tr>
-	</table>
+	Metoda slouží k animaci CSS vlastností. Je třeba zadat *time* v
+	milisekundách a co se bude animovat *what* (viz níže). Další
+	potřebnou informací je v jakém rozsahu hodnot animace proběhne *start* - *end*.
+	Parametry *start* a *end* je vhodné zadávat i s jednotkou ( např.: "100px", "20%" ) nebo ve vhodném formátu ( color: "#ff0000" ).
+	U některých délkových vlastností se jednotka nemusí uvádět a pak se použije "px". ( které to jsou lze zjistit v poli JAX._animatePXUnits )
+	Pokud je parametr *start* zadán jako <i>null</i> pak se zkouší najít hodnota nastavená na elementu (pomocí JAK.DOM.getStyle ) - používat s rozvahou.
+	<br><br>
+	<b>Příklady animovatelných vlastností</b>
+	@example
+		width             "100px"    "200px"
+		opacity           0.0        1.0
+		backgroundColor   "#000000"  "#ff0000"
 	Lze animovat teoreticky jakoukoli CSS vlastnost, stačí znát její správný název :)
 
-	<h4>Příklad</h4>
+	
 	@example
 		// animuje vysku elementu 10-100px po dobu 500ms
 		elm.animate( 500, "height", "10px", "100px" )
@@ -51,11 +45,8 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 
 @def animateStop( what=null )
-	<p>
-		Zastavuje běžící animace. Pokud je zadán *what* zastaví jen animaci dané vlastnosti.
-	</p>
+	Zastavuje běžící animace. Pokud je zadán *what* zastaví jen animaci dané vlastnosti.
 
-	<h4>Příklad</h4>
 	@example
 		// animace vysky a sirky; animace sirky se stopne
 		elm.animate( 500, "height", "10px", "100px" )
@@ -68,11 +59,8 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 @def delay( time )
 	@note
 		Tato metoda <a href="#section1">zamyká element</a>.
-	<p>
-		Na zadaný čas <b>time</b> "zamkne" volání dalších metod. Neovlivňuje
-		další delay nebo metodu [element.animate].
-	</p>
-	<h4>Příklad</h4>
+	Na zadaný čas <b>time</b> "zamkne" volání dalších metod. Neovlivňuje
+	další delay nebo metodu [element.animate].
 	@example
 		// za 5 sekund skryje element
 		element.delay( 5000 ).hide()
@@ -82,10 +70,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 @def callFunction( func )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Volá zadanou funkci <b>func</b> s argumentem elm jež se rovná danému elementu.
-	</p>
-	<h4>Příklad</h4>
+	Volá zadanou funkci <b>func</b> s argumentem elm jež se rovná danému elementu.
 	@example
 		// po uplynuti 500ms zmeni barvu textu v elementu na cervenou
 		element.delay(500).callFunction(function(elm){ elm.style.color = "#f00" })
@@ -95,10 +80,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 @def addElement( def, attrs )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Metoda vytvoří potomka daného elementu dle zadaných parametrů. Více u [JAX.make].
-	</p>
-	<h4>Příklad</h4>
+	Metoda vytvoří potomka daného elementu dle zadaných parametrů. Více u [JAX.make].
 	@example
 		// v elementu vytvori div s className="trida" a innerHTML="Text"
 		element.addElement("div.trida",{html:"Text"})
@@ -108,10 +90,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 @def nextNode( query )
 	@note
 		Tato metoda se nedá použít pro [JAX.HTMLCollection].
-	<p>
-		Metoda hledá nejbližší element za aktuálním elementem vyhovující zadané *query*.
-	</p>
-	<h4>Příklad</h4>
+	Metoda hledá nejbližší element za aktuálním elementem vyhovující zadané *query*.
 	@example
 		// vraci neblizsi div.trida
 		element.nextNode( "div.trida" )
@@ -120,35 +99,27 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 @def prevNode( query )
 	@note
 		Tato metoda se nedá použít pro [JAX.HTMLCollection].
-	<p>
-		Stejná metoda jako [element.nextNode] jen hledá před elementem.
-	</p>
+	Stejná metoda jako [element.nextNode] jen hledá před elementem.
 
 
 @def addClass( cls, ... )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Přidá elementu třídu <b>cls</b>.
-	</p>
+	Přidá elementu třídu <b>cls</b>.
 	@note
 		Od verze 1.15 lze předat libovolný počet argumentů. Všechny zadané třídy budou přidány.
 
 @def removeClass( cls, ... )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Odebere elementu třídu <b>cls</b>.
-	</p>
+	Odebere elementu třídu <b>cls</b>.
 	@note
 		Od verze 1.15 lze předat libovolný počet argumentů. Všechny zadané třídy budou odstraněny.
 
 @def hasClass( cls )
 	@note
 		Tato metoda se nedá použít pro [JAX.HTMLCollection].
-	<p>
-		Vrací true pokud má element třídu <b>cls</b>.
-	</p>
+	Vrací true pokud má element třídu <b>cls</b>.
 
 
 
@@ -158,21 +129,18 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 @def event( type, callback_obj, callback_method )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Navěsí na element posluchač události <b>type</b>.<br>
-		Callback lze zadat dvěma způsoby:<br>
-			&nbsp;&nbsp;&nbsp;&nbsp;element.event( "click", this.method.bind(this) )<br>
-			&nbsp;&nbsp;&nbsp;&nbsp;element.event( "click", this, "method" )<br>
-		<b>Metoda vrací ID posluchače události.</b>
-	</p>
-	<p>
-		Další argumenty funkce jsou předány callbacku.
-	</p>
-	<h4>Příklad</h4>
+	Navěsí na element posluchač události <b>type</b>.<br>
+	Callback lze zadat dvěma způsoby:<br>
+	@example
+		element.event( "click", this.method.bind(this) )
+		element.event( "click", this, "method" )
+	<b>Metoda vrací ID posluchače události.</b>
+	Další argumenty funkce jsou předány callbacku.
+	
 	@example
 		function func( e, elm, arg1, arg2 ){
-		&nbsp;&nbsp;&nbsp;&nbsp;// arg1 == 666
-		&nbsp;&nbsp;&nbsp;&nbsp;// arg2 == { "a": "Test" }
+		    // arg1 == 666
+		    // arg2 == { "a": "Test" }
 		}
 		// naveseni posluchace
 		element.event( "click", func, false, 666, { "a": "Test" } )
@@ -181,10 +149,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 @def removeEvent( type )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Odstraní posluchače daného typu <b>type</b> události.
-	</p>
-	<h4>Příklad</h4>
+	Odstraní posluchače daného typu <b>type</b> události.
 	@example
 		element.event( "click", func )
 		element.removeEvent( "click" )
@@ -197,10 +162,8 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 @def modify( attrs )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Změni element pomocí fce [JAX.modify].
-	</p>
-	<h4>Příklad</h4>
+	Změni element pomocí fce [JAX.modify].
+	
 	@example
 		element.modify( { "style": { "color": "#f00" } } )
 
@@ -210,22 +173,18 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 @def append( elements , time=0 )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Appenduje do elementu prvky z pole <b>elements</b>. Místo pole lze
-		zadat jen jeden prvek, pak funguje jako klasický appendChild.
-		Pokud je zadán čas v ms <b>time</b> pak se vložení elementů animuje
-		(opacity 0.0-1.0).
-	</p>
+	Appenduje do elementu prvky z pole <b>elements</b>. Místo pole lze
+	zadat jen jeden prvek, pak funguje jako klasický appendChild.
+	Pokud je zadán čas v ms <b>time</b> pak se vložení elementů animuje
+	(opacity 0.0-1.0).
 
 
 @def remove( time=0 )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Odstraní element ze svého rodiče.
-		Pokud je zadán čas v ms <b>time</b> pak se odstranění elementu animuje
-		(opacity 1.0-0.0).
-	</p>
+	Odstraní element ze svého rodiče.
+	Pokud je zadán čas v ms <b>time</b> pak se odstranění elementu animuje
+	(opacity 1.0-0.0).
 
 @def removeNodes( query )
 	@note
@@ -241,77 +200,65 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 @def storeValue( key, value )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Uloží do vlastnosti elementu hodnotu <b>value</b> pod zadaný klíč <b>key</b>. Hodnota může být cokoli.
-	</p>
+	
+	Uloží do vlastnosti elementu hodnotu <b>value</b> pod zadaný klíč <b>key</b>. Hodnota může být cokoli.
 
 @def restoreValue( key, default_value=null )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
 	@note
 		Tato metoda se nedá použít pro [JAX.HTMLCollection].
-	<p>
-		Vrací uloženou hodnotu podle daného klíče <b>key</b>. Pokud není klíč nalezen vrací <b>default_value</b>.
-	</p>
+	Vrací uloženou hodnotu podle daného klíče <b>key</b>. Pokud není klíč nalezen vrací <b>default_value</b>.
 
 @def toggle( [ time ] )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Přepíná zobrazení elementu. Parametr <b>time</b> slouží k animaci. Využívá element.show/hide více tam.
-	</p>
+	Přepíná zobrazení elementu. Parametr <b>time</b> slouží k animaci. Využívá element.show/hide více tam.
 
 @def show( time=0, target_opacity=1.0, inline=false )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Zobrazí element - nastaví .style.display na "block" nebo ( pokud je argument inline == true ) na "inline".
-		Pokud je zadán argument <b>time</b> pak se zobrazení animuje ( opacity 0.0 - 1.0 ), lze nastavit maximální
-		hodnotu opacity argumentem <b>target_opacity</b>.
-	</p>
+	Zobrazí element - nastaví .style.display na "block" nebo ( pokud je argument inline == true ) na "inline".
+	Pokud je zadán argument <b>time</b> pak se zobrazení animuje ( opacity 0.0 - 1.0 ), lze nastavit maximální
+	hodnotu opacity argumentem <b>target_opacity</b>.
 
 @def hide( time=0 )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	<p>
-		Funguje přesně opačně než [element.show].
-	</p>
+	Funguje přesně opačně než [element.show].
 
 @def getRect( meter_in_dom=false )
-	<p>
-		Tato metoda vrací objekt obsahujicí informace o poloze a velikosti elementu. Je-li volitelný argument
-		<b>meter_in_dom</b> == true pak se bude velikost elementu měřit v místě kde je - budou na něj aplikována CSS pravidla z rodiče. Více informací u [JAX.OffScreenMeter].
-	</p>
+	Tato metoda vrací objekt obsahujicí informace o poloze a velikosti elementu. Je-li volitelný argument
+	*meter_in_dom* == true pak se bude velikost elementu měřit v místě kde je - budou na něj aplikována CSS pravidla z rodiče. Více informací u [JAX.OffScreenMeter].
+
 	@example
 		element.getRect() =&gt; {<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;"left": #,<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;"top": #,<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;"width": #,<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;"height": #<br/>
+		    "left": #,<br/>
+		    "top": #,<br/>
+		    "width": #,<br/>
+		    "height": #<br/>
 		}
 
 
 
 @section Zamykání elementu
-<p>
-	Některé metody umí po dobu svého běhu "zamknout" element. To znamená, že
-	volání některých metod se pozdrží až doběhne "zámek". Metody jež jsou blokovány jsou označeny poznámkou.
+Některé metody umí po dobu svého běhu "zamknout" element. To znamená, že
+volání některých metod se pozdrží až doběhne "zámek". Metody jež jsou blokovány jsou označeny poznámkou.
 
-	Toto zamykání dělají metody:
-	<ul>
-		<li>[element.animate]</li>
-		<li>[element.delay]</li>
-	</ul>
-	A tyto metody zamykají pokud je u nich použita animace průhlednosti:
-	<ul>
-		<li>[element.show]</li>
-		<li>[element.hide]</li>
-		<li>[element.toggle]</li>
-		<li>[element.append]</li>
-		<li>[element.remove]</li>
-	</ul>
-</p>
-<h4>Příklad</h4>
+Toto zamykání dělají metody:
+<ul>
+	<li>[element.animate]</li>
+	<li>[element.delay]</li>
+</ul>
+A tyto metody zamykají pokud je u nich použita animace průhlednosti:
+<ul>
+	<li>[element.show]</li>
+	<li>[element.hide]</li>
+	<li>[element.toggle]</li>
+	<li>[element.append]</li>
+	<li>[element.remove]</li>
+</ul>
+
 @example
 	// probehne animace vysky 100-0px a po jejim ukonceni se element skryje
 	element.animate( 500, "height", "100px", "0px" ).hide()

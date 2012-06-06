@@ -19,7 +19,7 @@
 		JAX.make( "div", { "title": "Popis" } )// vystupem je <div title="Popis" alt="Popis"/>
 
 	<h4>Seznam možných vlastností (attrs)</h4>
-	<table>
+	<table width="98%" class="table">
 		<tr>
 			<th>Název</th>
 			<th>Hodnota</th>
@@ -35,12 +35,8 @@
 		<tr><td>style</td><td>asoc. pole</td><td>nastaví elementu style dle obsahu pole Např.: {"color":"#F00","zIndex":120}</td></tr>
 	</table>
 	<br/>
-	<b>Dále je mozno zadat různé události viz JAX._elmEvents</b><br/>
-	<br/>
-	<b>A teoreticky jakoukoli jinou vlastnost elementu.</b>
-	Např.: target, href, name, src ...<br>
+	Dále je mozno zadat různé události viz JAX._elmEvents. A teoreticky jakoukoli jinou vlastnost elementu.	Např.: target, href, name, src ...<br>
 
-	<h4>Příklad</h4>
 	@example
 		JAX.make( "div", { "click": function(e, elm){ ... } } );
 		JAX.make( "div", { "width": "160px" } );
@@ -54,7 +50,7 @@
 @def JAX.modify(elm, attrs)
 	undocumented
 
-@def JAX.query(query, context)
+@def JAX.query(query, context= )
 	Vrací elementy vyhovující zadané *query*. Lze zadat *context* což jest element nebo dokument v jehož potomcích se hledá.
 	Vždy vrací pole elementů.<br/><br/>
 	<b>Co to umí?</b>
@@ -73,7 +69,7 @@
 		Prvek * lze použít až od verze 1.17
 
 
-@def JAX.OffScreenMeter(elm, meterindom)
+@def JAX.OffScreenMeter(elm, meterindom=)
 	Změří rozměry elementu bez nutnosti jeho appendování do dokumentu. Fce funguje tak, že vytvoří kopii elementu a vloží ji jako první element v body, poté se "přečtou" hodnoty offsetWidth a offsetHeight.<br>
 	Vrací: {width:#,height:#}<br/>
 	<br/>
