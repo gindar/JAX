@@ -22,9 +22,23 @@
 			<div class="xxx">XXX</div>
 			<span class="sss">SSS</span>
 		</div>
-
-		<script>
-			JAX.$(".noderemove").removeNodes("*")
-		</script>
+		<h1>Pseudotřída :selected</h1>
+		<select name="test">
+		    <option value="0">Ne</option>
+		    <option value="1">Ano</option>
+            <option value="2">Možná</option>
+		</select>
+        <script>
+        	
+        	JAX.$(".noderemove").removeNodes("*")
+        
+	        var selectElm = JAX.$("select");
+	        selectElm.event("change",showSelected);
+	          
+	        function showSelected() {
+	        	var selectedOption = JAX.$( "select option:selected" );
+				alert("Byla vybrána volba:" + selectedOption.elements[0].label +" s hodnotou: " + selectedOption.elements[0].value);
+	        }                 
+        </script>		
 	</body>
 </html>
