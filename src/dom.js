@@ -156,6 +156,7 @@ JAX._query_checkElm = function(elm,ob,index,count){
 			if(pseudo == "even" && index % 2 == 0) return false;
 			if(pseudo == "odd" && index % 2 != 0) return false;
 			if(pseudo == "last" && index != count-1) return false;
+            if(pseudo == "selected" && ! elm.selected ) return false;
 		}
 	}
 	return true;
