@@ -12,7 +12,6 @@
 	se element vytvoří.<br>
 	Pokud je *nodecor* true pak nebude vytvořený element automaticky odekorován.
 
-	<h4>Příklad</h4>
 	@example
 		JAX.make( "div.trida1.trida2" )// vystupem je <div class="trida1 trida2"/>
 		JAX.make( "div#idecko.trida1" )// vystupem je <div id="idecko" class="trida1"/>
