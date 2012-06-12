@@ -1,6 +1,8 @@
 JAX (JAK Extended)
 ===
 
+Licencováno pod MIT License.
+
 Postaveno na [seznam/JAK](https://github.com/seznam/JAK).
 
 JAX je kompaktní a jednoduchý systém silně provázaných knihoven, usnadňující práci v prostředí jazyka JavaScript a knihovny JAK.
