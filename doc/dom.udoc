@@ -42,13 +42,9 @@
 		JAX.make( "a", { "href": "/path/to" } );
 		JAX.make( "img", { "src": "naha_baba.png" } );
 
-
-@def JAX.mmake(q, number, func, doc, nodecor)
-	undocumented
-
 @def JAX.modify(elm, attrs)
-	undocumented
-
+	Funkce upravuje vlastnosti elementu. Chová se stejně jako [JAX.make].
+	
 @def JAX.query(query, context= )
 	Vrací elementy vyhovující zadané *query*. Lze zadat *context* což jest element nebo dokument v jehož potomcích se hledá.
 	Vždy vrací pole elementů.<br/><br/>
