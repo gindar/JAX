@@ -11,11 +11,11 @@ Největší část této knihovny se věnuje odekorování elementu užitečným
 Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 
-
+@section Animace, časovač a volání funkcí
 
 @def animate( time, what, start, end, method="LINEAR", endcallback= )
 	@note
-		Tato metoda <a href="#section1">zamyká element</a>.
+		Tato metoda <a href="#section6">zamyká element</a>.
 	@warning
 		Tato metoda vyžaduje JAK.CSSInterpolator. Soubor jax-all.js obsahuje vždy funkční verzi.
 	Metoda slouží k animaci CSS vlastností. Je třeba zadat *time* v
@@ -58,7 +58,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 @def delay( time )
 	@note
-		Tato metoda <a href="#section1">zamyká element</a>.
+		Tato metoda <a href="#section6">zamyká element</a>.
 	Na zadaný čas <b>time</b> "zamkne" volání dalších metod. Neovlivňuje
 	další delay nebo metodu [element.animate].
 	@example
@@ -69,22 +69,51 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 @def callFunction( func )
 	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
 	Volá zadanou funkci <b>func</b> s argumentem elm jež se rovná danému elementu.
 	@example
 		// po uplynuti 500ms zmeni barvu textu v elementu na cervenou
 		element.delay(500).callFunction(function(elm){ elm.style.color = "#f00" })
 
 
+@section Procházení a manipulace s DOM
 
 @def addElement( def, attrs )
 	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
 	Metoda vytvoří potomka daného elementu dle zadaných parametrů. Více u [JAX.make].
 	@example
 		// v elementu vytvori div s className="trida" a innerHTML="Text"
 		element.addElement("div.trida",{html:"Text"})
 
+@def append( elements , time=0 )
+	@note
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
+	Appenduje do elementu prvky z pole <b>elements</b>. Místo pole lze
+	zadat jen jeden prvek, pak funguje jako klasický appendChild.
+	Pokud je zadán čas v ms <b>time</b> pak se vložení elementů animuje
+	(opacity 0.0-1.0).
+	
+@def remove( time=0 )
+	@note
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
+	Odstraní element ze svého rodiče.
+	Pokud je zadán čas v ms <b>time</b> pak se odstranění elementu animuje
+	(opacity 1.0-0.0).
+
+	@note
+		Místo time lze použít: element.animate(time,"opacity",1,0).remove()
+
+@def removeNodes( query )
+	@note
+		Novinka ve verzi 1.17.
+	Odstraní potomky elementu filtrované dle zadané *query*.
+
+	@example
+		JAX.$(".someclass").removeNodes( "div" ) // odstrani vsechny potomky <div>
+		JAX.$(".someclass").removeNodes( ".classname" ) // odtrani vsechny potomky se tridou .classname
+		JAX.$(".someclass").removeNodes( "div.classname *" ) // odstrani vsechny potomky divů se tridou classname
+		JAX.$(".someclass").removeNodes( "*" ) // odstrani vsechny potomky
 
 
 @def nextNode( query )
@@ -102,16 +131,19 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 	Stejná metoda jako [element.nextNode] jen hledá před elementem.
 
 
+
+@section Třídy
+
 @def addClass( cls, ... )
 	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
 	Přidá elementu třídu <b>cls</b>.
 	@note
 		Od verze 1.15 lze předat libovolný počet argumentů. Všechny zadané třídy budou přidány.
 
 @def removeClass( cls, ... )
 	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
 	Odebere elementu třídu <b>cls</b>.
 	@note
 		Od verze 1.15 lze předat libovolný počet argumentů. Všechny zadané třídy budou odstraněny.
@@ -121,9 +153,11 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 		Tato metoda se nedá použít pro [JAX.HTMLCollection].
 	Vrací true pokud má element třídu <b>cls</b>.
 
+@section Události
+
 @def listen( type, callback_obj, callback_method )
 	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
 	Navěsí na element posluchač události <b>type</b>.<br>
 	Callback lze zadat dvěma způsoby:<br>
 	@example
@@ -147,7 +181,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 @def removeEvent( type )
 	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
 	Odstraní posluchače daného typu <b>type</b> události.
 	@example
 		element.event( "click", func )
@@ -157,74 +191,43 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 		JAK.Events.removeListener( eid );
 
 
-
-@def modify( attrs )
-	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	Změni element pomocí fce [JAX.modify].
-	
-	@example
-		element.modify( { "style": { "color": "#f00" } } )
-
-
-
-
-@def append( elements , time=0 )
-	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	Appenduje do elementu prvky z pole <b>elements</b>. Místo pole lze
-	zadat jen jeden prvek, pak funguje jako klasický appendChild.
-	Pokud je zadán čas v ms <b>time</b> pak se vložení elementů animuje
-	(opacity 0.0-1.0).
-
-
-@def remove( time=0 )
-	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
-	Odstraní element ze svého rodiče.
-	Pokud je zadán čas v ms <b>time</b> pak se odstranění elementu animuje
-	(opacity 1.0-0.0).
-
-@def removeNodes( query )
-	@note
-		Novinka ve verzi 1.17.
-	Odstraní potomky elementu filtrované dle zadané *query*.
-
-	@example
-		JAX.$(".someclass").removeNodes( "div" ) // odstrani vsechny potomky <div>
-		JAX.$(".someclass").removeNodes( ".classname" ) // odtrani vsechny potomky se tridou .classname
-		JAX.$(".someclass").removeNodes( "div.classname *" ) // odstrani vsechny potomky divů se tridou classname
-		JAX.$(".someclass").removeNodes( "*" ) // odstrani vsechny potomky
+@section Další metody
 
 @def storeValue( key, value )
 	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
 	
 	Uloží do vlastnosti elementu hodnotu <b>value</b> pod zadaný klíč <b>key</b>. Hodnota může být cokoli.
 
 @def restoreValue( key, default_value=null )
 	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
 	@note
 		Tato metoda se nedá použít pro [JAX.HTMLCollection].
 	Vrací uloženou hodnotu podle daného klíče <b>key</b>. Pokud není klíč nalezen vrací <b>default_value</b>.
 
 @def toggle( [ time ] )
 	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
 	Přepíná zobrazení elementu. Parametr <b>time</b> slouží k animaci. Využívá element.show/hide více tam.
 
 @def show( time=0, target_opacity=1.0, inline=false )
 	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
 	Zobrazí element - nastaví .style.display na "block" nebo ( pokud je argument inline == true ) na "inline".
 	Pokud je zadán argument <b>time</b> pak se zobrazení animuje ( opacity 0.0 - 1.0 ), lze nastavit maximální
 	hodnotu opacity argumentem <b>target_opacity</b>.
 
+	@note
+		Místo time lze použít: element.animate(time,"opacity",0,1).show()
+
 @def hide( time=0 )
 	@note
-		Tato metoda může být blokována <a href="#section1">zámkem</a>.
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
 	Funguje přesně opačně než [element.show].
+
+	@note
+		Místo time lze použít: element.animate(time,"opacity",1,0).hide()
 
 @def getRect( meter_in_dom=false )
 	Tato metoda vrací objekt obsahujicí informace o poloze a velikosti elementu. Je-li volitelný argument
@@ -237,6 +240,15 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 		    "width": #,<br/>
 		    "height": #<br/>
 		}
+
+@def modify( attrs )
+	@note
+		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]
+	Změni element pomocí fce [JAX.modify].
+	
+	@example
+		element.modify( { "style": { "color": "#f00" } } )
+
 
 
 
@@ -261,5 +273,4 @@ A tyto metody zamykají pokud je u nich použita animace průhlednosti:
 @example
 	// probehne animace vysky 100-0px a po jejim ukonceni se element skryje
 	element.animate( 500, "height", "100px", "0px" ).hide()
-
 

@@ -3,7 +3,9 @@
 @lang javascript
 
 @name Index
+
 @section JAX v@:VERSION: - JAK Extended
+
 Dokumentace je platná pro verzi <b>@:VERSION:</b>.<br/>
 <br/>
 <b>Informační boxy</b>
