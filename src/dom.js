@@ -75,7 +75,7 @@ JAX.modify = function(elm,attrs){
 		var v = attrs[i];
 		if( JAX._elmEvents.indexOf(i) != -1 ){
 			JAX.DecorateElement(elm);
-			elm.event(i,v);
+			elm.listen(i,v);
 		}
 	}
 	for(var i in attrs){

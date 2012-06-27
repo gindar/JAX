@@ -165,10 +165,10 @@ JAX.RegisterDecor("hasClass", JAX.METHOD_SINGLE, function( cls ){
 })
 
 // Navesi na element posluchace udalosti
-JAX.RegisterDecor("listen", JAX.METHOD_BOTH, function(){ this.event.apply( this, arguments ) })
+JAX.RegisterDecor("event", JAX.METHOD_BOTH, function(){ this.listen.apply( this, arguments ) })
 
-JAX.RegisterDecor("event", JAX.METHOD_BOTH, function(type,method,obj){
-	if(this._lockCheck("event",arguments)) return this;
+JAX.RegisterDecor("listen", JAX.METHOD_BOTH, function(type,method,obj){
+	if(this._lockCheck("listen",arguments)) return this;
 	var method = method||null;
 	if( !method ) return false;
 

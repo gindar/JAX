@@ -121,12 +121,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 		Tato metoda se nedá použít pro [JAX.HTMLCollection].
 	Vrací true pokud má element třídu <b>cls</b>.
 
-
-
-
 @def listen( type, callback_obj, callback_method )
-	alias pro [element.event]
-@def event( type, callback_obj, callback_method )
 	@note
 		Tato metoda může být blokována <a href="#section1">zámkem</a>.
 	Navěsí na element posluchač události <b>type</b>.<br>
@@ -145,6 +140,10 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 		// naveseni posluchace
 		element.event( "click", func, false, 666, { "a": "Test" } )
 
+@def event( type, callback_obj, callback_method )
+	@note
+		Použití této metody je nedoporučené. Bude zachována kvůli zpětné kompatibilitě ovšem 
+	alias pro [element.listen]
 
 @def removeEvent( type )
 	@note

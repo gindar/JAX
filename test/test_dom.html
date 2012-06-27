@@ -33,7 +33,7 @@
         	JAX.$(".noderemove").removeNodes("*")
         
 	        var selectElm = JAX.$("select");
-	        selectElm.event("change",showSelected);
+	        selectElm.listen("change",showSelected);
 	          
 	        function showSelected() {
 	        	var selectedOption = JAX.$( "select option:selected" );
