@@ -86,6 +86,35 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 		// v elementu vytvori div s className="trida" a innerHTML="Text"
 		element.addElement("div.trida",{html:"Text"})
 
+@def addBefore( element )
+	@note
+		Metoda je dostupná od verze 1.19.
+		
+	Metoda vloží *element* <b>PŘED</b> stávající element.
+	
+	@example
+		var elm = JAX.make("div.trida");
+		JAX.$("#target_element",false,true).addBefore( elm );
+		/* v HTML to pak vypada takto
+			<div class="trida">
+			<#target_element>
+		*/
+
+@def addAfter( element )
+	@note
+		Metoda je dostupná od verze 1.19.
+		
+	Metoda vloží *element* <b>ZA</b> stávající element.
+	
+	@example
+		var elm = JAX.make("div.trida");
+		JAX.$("#target_element",false,true).addAfter( elm );
+		/* v HTML to pak vypada takto
+			<#target_element>
+			<div class="trida">
+		*/
+
+
 @def append( elements , time=0 )
 	@note
 		Tato metoda může být blokována zámkem. Viz [[Zamykání elementu]]

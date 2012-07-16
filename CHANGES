@@ -1,0 +1,3 @@
+1.19
+	 - Použití metody element.event je nedoporučené, raději postupně přejděte na element.listen. Metody jsou identické, ale název event je zavádějící. Metoda event bude zachována (navždy nebo dokud nevyhnije).
+	 - element.addBefore, element.addAfter - nové metody pro vkládání elementů před/za element

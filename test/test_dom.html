@@ -17,6 +17,7 @@
 		<style>
 			body,html {background:#000; color:#fff; }
 		</style>
+		<div class="nodeadd"><div class="xxx">XXX</div><span class="sss">SSS</span></div>
 
 		<div class="noderemove">
 			<div class="xxx">XXX</div>
@@ -30,7 +31,12 @@
 		</select>
         <script>
         	
-        	JAX.$(".noderemove").removeNodes("*")
+        	JAX.$(".noderemove").removeNodes("*");
+        	
+        	var elm = JAX.make("div",{html:"insert"});
+        	
+        	JAX.$(".nodeadd .sss",false,true).addAfter(elm);
+        	
         
 	        var selectElm = JAX.$("select");
 	        selectElm.listen("change",showSelected);

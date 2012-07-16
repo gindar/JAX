@@ -116,6 +116,24 @@ JAX.RegisterDecor("addElement", JAX.METHOD_BOTH, function(def,attrs){
 	return this;
 })
 
+// Vlozi element pred stavajici element
+JAX.RegisterDecor("addBefore", JAX.METHOD_SINGLE, function(element){
+	if(this._lockCheck("addBefore",arguments)) return this;
+	this.parentNode.insertBefore( element, this );
+	return this;
+})
+
+// Vlozi element za stavajici element
+JAX.RegisterDecor("addAfter", JAX.METHOD_SINGLE, function(element){
+	if(this._lockCheck("addAfter",arguments)) return this;
+	if( this.nextSibling ){
+		this.parentNode.insertBefore( element, this.nextSibling );
+	} else {
+		this.parentNode.appendChild( element );
+	}
+	return this;
+})
+
 // Prejde na nasledujici prvek dle zadane query
 JAX.RegisterDecor("nextNode", JAX.METHOD_SINGLE, function(query){
 	return JAX.$$( JAX._nodeWalk( this, query, 1 ) );
