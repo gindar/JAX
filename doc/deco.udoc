@@ -205,7 +205,7 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 @def event( type, callback_obj, callback_method )
 	@note
-		Použití této metody je nedoporučené. Bude zachována kvůli zpětné kompatibilitě ovšem 
+		Použití této metody je nedoporučené. Bude zachována kvůli zpětné kompatibilitě.
 	alias pro [element.listen]
 
 @def removeEvent( type )

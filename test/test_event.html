@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jax test</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<script src="../deps/jak.light.js"></script>
+		<script src="../deps/timekeeper.js"></script>
+		<script src="../deps/interpolator.js"></script>
+		<script src="../src/core.js"></script>
+		<script src="../src/dom.js"></script>
+		<script src="../src/element.js"></script>
+		<script src="../src/deco.js"></script>
+		<script src="../src/fx.js"></script>
+		<script src="../src/dombuilder.js"></script>
+	</head>
+	<body>
+		<style>
+			body,html {background:#000; color:#fff; }
+			.test1 { color:#f00; }
+			.test2 { color:#0f0; }
+		</style>
+		
+		<div class="test1">TEXT</div>
+		<div class="test2">TEXT</div>
+		<script>
+			JAX.DEBUG = true;
+			
+			function f1(e,elm){alert("f1")}
+			function f2(e,elm){alert("f2")}
+			
+			JAX.getElement(".test1").event("click",f1);
+			JAX.getElement(".test2").listen("click",f2);
+		</script>
+	</body>
+</html>

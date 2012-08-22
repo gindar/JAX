@@ -5,7 +5,7 @@ rm -Rf ./build/*
 mkdir ./build
 
 
-codegrinder doc/*.udoc --out=doc --version=$VERSION
+codegrinder build doc/*.udoc --out=doc --version=$VERSION --cssrewrite
 
 cat src/core.js src/element.js src/deco.js src/dom.js src/dombuilder.js src/fx.js > build/jax.js
 cat deps/timekeeper.js deps/interpolator.js build/jax.js > build/jax-all.js

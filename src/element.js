@@ -1,8 +1,9 @@
 
 // toto pole bude plneno metodami jimiz se odekoruje element
 JAX.ElementDecorator = {};
-JAX.ElementDecorator.__decorated = true;
-JAX.ElementDecorator.__locked = 0;
+JAX.ElementDecorator.prototype = {};
+JAX.ElementDecorator.prototype.__decorated = true;
+JAX.ElementDecorator.prototype.__locked = 0;
 JAX.ElementDecoratorArrays = ["__queue","__animations","__event_def"];
 
 JAX.$ = function(query,context,single){
@@ -16,6 +17,10 @@ JAX.$ = function(query,context,single){
 	}
 }
 
+JAX.getElement = function(query,context){
+	return JAX.$(query, context||false, true);
+}
+
 JAX.$$ = function(elm_id){
 	var elm = JAK.gel(elm_id);
 	if(elm === null) return null;
@@ -27,8 +32,8 @@ JAX.DecorateElement = function( elm, recursive ){
 	var recursive = !!recursive;
 	if(!elm) return false;
 	if(elm.__decorated) return false;
-	for(var method in JAX.ElementDecorator){
-		elm[method] = JAX.ElementDecorator[method];
+	for(var method in JAX.ElementDecorator.prototype){
+		elm[method] = JAX.ElementDecorator.prototype[method];
 	}
 	for(var i = 0; i < JAX.ElementDecoratorArrays.length; i ++){
 		elm[JAX.ElementDecoratorArrays[i]] = [];
@@ -43,7 +48,6 @@ JAX.DecorateElement = function( elm, recursive ){
 };
 
 JAX.HTMLCollection = JAX.makeClass( "JAX.HTMLCollection" );
-
 
 JAX.HTMLCollection.prototype.$constructor = function(elms){
 	var elms = JAK.DOM.arrayFromCollection(elms);
@@ -127,24 +131,17 @@ JAX.HTMLCollection.prototype.process = function(method,args){
 	var element = null;
 	for(var i = 0; i < this.elements.length; i ++ ){
 		element = this.elements[i];
-		JAX.DecorateElement( element );
+		if(!element.__decorated) JAX.DecorateElement( element );
 		var meth = element[method];
 		meth.apply(element,args);
 	}
 	return this;
 }
 
-
-JAX.RegisterDecor = function(method,applies_to,func){
-	JAX.ElementDecorator[method] = func;
-	if(applies_to == JAX.METHOD_BOTH){
-		JAX.HTMLCollection.prototype[method] = function(){
-			return this.process(method,arguments);
-		}
-	} else {
-		return function(){
-			throw new Error("JAX: Metodu '"+method+"' nelze použít nad kolekcí.");
-		}
-	}
+/* register HTMLCollection method */
+JAX.CollectionMethod = function(method){
+	JAX.HTMLCollection.prototype[method] = function(){
+		return this.process(method,arguments);
+	}		
 }
 

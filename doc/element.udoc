@@ -18,7 +18,8 @@
 		JAX.$( "div *" ) => vsechny potomky vsech divu
 		JAX.$( "#idecko", false, true ) => jeden element
 
-
+@def JAX.getElement(query, context=document)
+	To stejné jako [JAX.$] s tím rozdílem, že vrací jen jeden element.
 
 @def JAX.$$(elm_id)
 	Najde element s id == *elm_id* a odekoruje jej. Místo ID lze

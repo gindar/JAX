@@ -46,6 +46,7 @@ JAX._maker = function(doc,tagname,attrs){
 }
 
 JAX.mmake = function(q,number,func,doc,nodecor){
+	JAX._DEPRECATED("JAX.mmake","1.20","JAX.DOMBuilder");
 	var _elms = [];
 	var elm = null;
 	for(var i = 0; i < number; i ++ ){
@@ -110,6 +111,7 @@ JAX.modify = function(elm,attrs){
 	return elm;
 }
 
+/* rozbije query=[] na objekty */
 JAX._queryparse = function(query){
 	var ob = {id:"",tag:"",className:[],pseudoClasses:[]};
 	var e = "t";

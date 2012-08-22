@@ -3,11 +3,26 @@
 var JAX = {
 	version: "DEVEL",
 	DECORATE_ONDEMAND: false,
-	DEBUG: false,
-	METHOD_BOTH: 1,
-	METHOD_SINGLE: 2,
-	_uid: 0
+	DEBUG: false
 };
+
+if(!window.console){console = {}};
+if(!window.console.log){window.console.log = function(){}};
+if(!window.console.info){window.console.info = function(){}};
+if(!window.console.warn){window.console.warn = function(){}};
+if(!window.console.error){window.console.error = function(){}};
+
+JAX._DEPRECATED = function(func,since,instead){
+	if(JAX.DEBUG){
+		var msg = "WARNING: Deprecated function '"+(func||"?")+"' ";
+		var since = since||false;
+		var instead = instead||false;
+		if(since){msg += "since version "+since+"";};
+		msg += ". ";
+		if(instead){msg += "Use '"+instead+"' instead.";};
+		console.warn(msg);
+	}
+}
 
 JAX.makeClass = function( NAME, EXTEND ){
 	var obj = {
@@ -23,6 +38,8 @@ JAX.makeClass = function( NAME, EXTEND ){
 	return instance;
 }
 
+/* TODO dokumentace; bude veřejné?, zatím ne. */
+/* JAX internal events */
 JAX.IEvents = JAX.makeClass("JAX.IEvents");
 
 JAX.IEvents.prototype.listen = function( event, callback ){
@@ -41,8 +58,6 @@ JAX.IEvents.prototype.event = function( event, element ){
 		}
 	}
 }
-
-
 
 JAX.hash = function(value){
 	var result = 0;
@@ -91,6 +106,7 @@ JAX.updateObject = function( updated, newer ){
 	return updated;
 }
 
+/* setTimeout wrapper */
 JAX.Delay = function(func,time){
 	this.args = [];
 	if( arguments.length > 2 ){
@@ -113,6 +129,7 @@ JAX.Delay.prototype.stop = function(){
 	clearTimeout(this.timer);
 }
 
+/* setInterval wrapper */
 JAX.Interval = function(func,time){
 	this.args = [];
 	if( arguments.length > 2 ){
@@ -133,31 +150,4 @@ JAX.Interval.prototype._cycle = function(){
 
 JAX.Interval.prototype.stop = function(){
 	clearInterval(this.timer);
-}
-
-JAX.IntervalCheck = function(checkfunc,callback,interval,timeout){
-	this.checkfunc = checkfunc;
-	this.callback = callback;
-	this._interval = interval || 100;
-	this._time = 0;
-	this._timeout = timeout || -1;
-	this.interval = new JAX.Interval(this.check.bind(this),this._interval);
-}
-
-JAX.IntervalCheck.prototype.check = function(){
-	if(this.checkfunc()){
-		this.callback(true);
-		this.stop();
-	}
-	if(this._timeout != -1){
-		this._time += this._interval;
-		if(this._time >= this._timeout){
-			this.callback(false);
-			this.stop();
-		}
-	}
-}
-
-JAX.IntervalCheck.prototype.stop = function(){
-	this.interval.stop();
 }

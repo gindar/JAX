@@ -1,3 +1,10 @@
+1.20
+	 - zušlechtění deco.js; metody elementu se již nepřidávají pomocí, registerDecor, ale vkládají se do prototypu JAX.ElementDecorator.
+	 - JAX._DEPRECATED - pokud je zapnutý JAX.DEBUG, pak některé zastaralé metody vyhazují do konzole hlášku: "WARNING: Deprecated function 'element.event' since version 1.19. Use 'element.listen' instead.", kterážto dává programátorovi najevo, že by danou fci měl přestat používat. Tak si ozkoušejte své scripty, zda nepoužíváte něco zastaralého.
+	 - Pročištění kódu od některých "mrtvých funkcí".
+	 - JAX.mmake - mrtvá funkce
+	 
+
 1.19
 	 - Použití metody element.event je nedoporučené, raději postupně přejděte na element.listen. Metody jsou identické, ale název event je zavádějící. Metoda event bude zachována (navždy nebo dokud nevyhnije).
 	 - element.addBefore, element.addAfter - nové metody pro vkládání elementů před/za element
