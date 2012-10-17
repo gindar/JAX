@@ -1,12 +1,11 @@
-# Created with CodeGrinder by Gindar <gindar@zamraky.cz>
 @page dom
-@lang javascript
+@language javascript
 
 @name Práce s DOMem
 @description Funkce pro tvorbu elementů, jejich úpravu, získání atd.
 @prefix
 
-@def JAX.make(q, attrs, doc=document, nodecor=false )
+@function JAX.make(q, attrs, doc=document, nodecor=false )
 	Funkce vytvoří element dle zadané "CSS query" *def*. Elementu je možno nastavit
 	další vlastnosti *attrs* (jde od asoc. pole). Dále je možné určit dokument (*doc*) v jehož kontextu
 	se element vytvoří.<br>
@@ -16,6 +15,7 @@
 		JAX.make( "div.trida1.trida2" )// vystupem je <div class="trida1 trida2"/>
 		JAX.make( "div#idecko.trida1" )// vystupem je <div id="idecko" class="trida1"/>
 		JAX.make( "div", { "title": "Popis" } )// vystupem je <div title="Popis" alt="Popis"/>
+	@end_example
 
 	<h4>Seznam možných vlastností (attrs)</h4>
 	<table width="98%" class="table">
@@ -41,11 +41,12 @@
 		JAX.make( "div", { "width": "160px" } );
 		JAX.make( "a", { "href": "/path/to" } );
 		JAX.make( "img", { "src": "naha_baba.png" } );
+	@end_example
 
-@def JAX.modify(elm, attrs)
+@function JAX.modify(elm, attrs)
 	Funkce upravuje vlastnosti elementu. Chová se stejně jako [JAX.make].
 	
-@def JAX.query(query, context= )
+@function JAX.query(query, context= )
 	Vrací elementy vyhovující zadané *query*. Lze zadat *context* což jest element nebo dokument v jehož potomcích se hledá.
 	Vždy vrací pole elementů.<br/><br/>
 	<b>Co to umí?</b>
@@ -54,15 +55,21 @@
 		JAX.query( ".trida" ) 			// vraci vsechny elementy se tridou trida
 		JAX.query( "#trida" ) 			// vraci element s id=trida
 		JAX.query( "div.xxx *" ) 		// vraci vsechny potomky divu
-	@warning
-		Prvek * lze použít až od verze 1.17
+	@end_example
+
+	@warning Prvek * lze použít až od verze 1.17
 	<b>Lze použít i více tříd, libovolné kombinace a cesty</b>
+
 	@example
 		JAX.query( "div.xxx.yyy.mmm" ) 		// vraci vsechny potomky divu s tridami xxx,yyy,mmm
 		JAX.query( "div.xxx span.trida" )
+	@end_example
+
 	<b>Umí i více queries za sebou, elementy budou v jednom poli (odděluje se čárkou)</b>
 	@example
 		JAX.query( "div.xxx,span.yyy,a.mmm" ) 	// vraci <div class="xxx">, <span class="yyy"> <a class="mmm">
+	@end_example
+
 	<b>Pseudotřídy</b>
 	@example
 		JAX.query( "div:first" ) 		// vraci prvni nalezeny element <div>
@@ -70,13 +77,13 @@
 		JAX.query( "div:even" )  		// vraci sude elementy <div>
 		JAX.query( "div:odd" )   		// vraci liche elementy <div>
 		JAX.query( "select option:selected" ) 	// vraci selected <option>
-	@warning
-		Pseudotřídu :selected lze použít až od verze 1.17.2
+	@end_example
 
-@def JAX.OffScreenMeter(elm, meterindom=)
+	@warning Pseudotřídu :selected lze použít až od verze 1.17.2
+
+@function JAX.OffScreenMeter(elm, meterindom=)
 	Změří rozměry elementu bez nutnosti jeho appendování do dokumentu. Fce funguje tak, že vytvoří kopii elementu a vloží ji jako první element v body, poté se "přečtou" hodnoty offsetWidth a offsetHeight.<br>
 	Vrací: {width:#,height:#}<br/>
 	<br/>
-	@note
-		Verze 1.15: Pokud je zadán volitelný argument *meterindom* pak se vytvořená kopie elementu nevkládá jako první element v body, ale před stávajicí element - tudíže lze takto měřit jen elementy již vložené do dokumentu (neplatí tedy první věta dokumentace této fce). Výhodou je, že na element jsou aplikována CSS pravidla odpovídajicí jeho umístění v dokumentu.
+	@note Verze 1.15: Pokud je zadán volitelný argument *meterindom* pak se vytvořená kopie elementu nevkládá jako první element v body, ale před stávajicí element - tudíže lze takto měřit jen elementy již vložené do dokumentu (neplatí tedy první věta dokumentace této fce). Výhodou je, že na element jsou aplikována CSS pravidla odpovídajicí jeho umístění v dokumentu.
 

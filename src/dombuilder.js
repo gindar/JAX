@@ -1,3 +1,7 @@
+/**
+	Třída slouží k pohodlnějšímu vytváření struktury HTMLElementů.
+	*doc* určuje v jakém kontextu se budou elementy tvořit.
+*/
 JAX.DOMBuilder = JAX.makeClass( "JAX.DOMBuilder" );
 
 JAX.DOMBuilder.VAR_FORMAT = "\\\{%\\\}";

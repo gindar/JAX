@@ -1,0 +1,113 @@
+@page dombuilder
+@language javascript
+
+@name DOM Builder
+@description Pohodlnější vytváření struktury HTMLElementů
+@prefix 
+
+@class JAX.DOMBuilder(doc=document)
+	Třída slouží k pohodlnějšímu vytváření struktury HTMLElementů.
+	*doc* určuje v jakém kontextu se budou elementy tvořit.
+	
+	@example
+		var elm = document.createElement("div");
+		var dom = new JAX.DOMBuilder();
+		dom.addBox("div.trida1",{ "style":{ "background": "#f00" } });
+			dom.add("a#odkaz",{ "href": "/path/to", "html": "Odkaz" });
+			dom.addBoxElement( elm );
+				dom.addText("Test");
+			dom.endBox();
+		dom.endBox();
+		
+		var frag = dom.getDom();// strom vytvořených elementů
+		document.body.appendChild( frag );
+		// v tomto místě je frag jen prázdný documentFragment
+	@end_example
+
+	<b>Výstup zapsaný v HTML:</b>
+	@example html
+		<div class="trida" style="background:#f00">
+			<a id="odkaz" href="/path/to">Odkaz</a>
+			<div>
+				Test<br>
+			</div>
+		</div>
+	@end_example
+
+
+	Elementy vytvořené metodami [add] a [addBox] jsou odekorovány pomocí [JAX.$$].
+	Pokud vytváříme větší množství elementů je vhodné dekorování vypnout a použít jej jen tam, kde bude opravdu potřeba. 
+	K tomu slouží vlastnost .decorating, která je defaultně true.
+		
+
+@method addBox(def, attrs=)
+	Metoda je shodná s [add] s tím rozdílem, že
+	vytvořený element je kontejnerem a další vložené elementy budou potomky tohoto elementu.
+	<b>Argumenty jsou shodné s [add].</b>
+	@note Metoda vrací referenci na vytvořený element.
+
+@method endBox()
+	Metoda "uzavře" aktuální kontejnerový element a další vkládáné elementy budou potomky rodiče.
+
+@method addText(txt)
+	Metoda je funguje podobně jako [add] jen vkládá do elementu *txt* (čistý text - createTextNode).
+
+@method add(def, attrs=None)
+	Vytvoří a přidá do aktuálního umístění nový element. Argument *def* je
+	stejný jako u [JAX.make], tedy string podobný CSS query.
+	*attrs* je asoc. pole parametrů, opět funguje stejně jako u [JAX.make].
+	@note Metoda vrací referenci na vytvořený element.
+
+@method addElement(elm)
+	Funguje podobně jako metoda [add] s tím rozdílem, že jako argument předáváme již vytvořený element.
+
+@method addBoxElement(elm)
+	Funguje podobně jako metoda [addBox] s tím rozdílem, že jako argument předáváme již vytvořený element. Kontejner se uzavře pomocí [endBox].
+
+@method getDom()
+	Vrací celý již vytvořený strom elementů jako DocumentFragment. Není vhodné využívat výstup této metody
+	k uchování reference na celý strom elementů, jelikož po appendnutí do dokumentu se documentFragment vyprázdní.
+
+@method appendTo(elm)
+	Vloží vygenerované elementy do zadaného elementu *elm* :)
+
+@method addTemplate(template, data)
+	Tato mocná metoda přijímá v argumentu *template* string nebo element jež poslouží jako šablona pro *data*.<br/>
+	Základem je string či innerHTML ze zadaného elementu. V této "šabloně" se nahrazují určité řetězce daty předanými v *data*.
+	*data* mohou být i polem, v tom případě slouží šablona jako předloha pro jeden prvek pole.<br/>
+	Pokud je *template* element vezme se jako šablona jeho innerHTML.
+
+	<h4>Příklad addTemplate</h4>
+	@example
+		data = [
+			{ "name": "Hynek", "sex": "muž", "prsa": false },
+			{ "name": "Jarmila", "sex": "žena", "prsa": true },
+			{ "name": "Vilém", "sex": "muž", "prsa": false }
+		]
+		
+		template = '<div class="{:first}{:last}">{:number}. Jméno:{name} ({sex}) {:index} {:if prsa}Má prsa{/}</div>'
+		
+		var dom = new JAX.DOMBuilder();
+		dom.addBox("div.trida1");
+			dom.addTemplate( template, data );
+		dom.endBox();
+	@end_example
+
+	Výstup zapsaný v HTML:
+	@example html
+		<div class=" trida1">
+			<div class="first">1. Jméno:Hynek (muž) 0 </div>
+			<div class="">2. Jméno:Jarmila (žena) 1 Má prsa</div>
+			<div class="last">3. Jméno:Vilém (muž) 2 </div>
+		</div>
+	@end_example
+
+	<h4>Syntaxe & příkazy</h4>
+	<p>
+		<b>{key}</b> - toto je nahrazeno odpovídajicí hodnotou z data ( data["key"] )<br>
+		<b>{:index}</b> - pokud je data pole pak každá položka má svůj index, tímto jej můžeme vypsat do šablony<br>
+		<b>{:number}</b> - podobné jako index, ale počítá se od 1 nikoli od 0<br>
+		<b>{:first}</b> a <b>{:last}</b> - tímto lze označit první a poslední položku {:first} se nahradí obsahem <b>JAX.DOMBuilder.FIRST_STRING</b> a {:last} 
+		tímto <b>JAX.DOMBuilder.LAST_STRING</b> ( můžete si je tedy sami nastavit - defaultně jsou "first" a "last" )<br>
+		<b>{:if key}něco{/}</b> - vypíše "něco" pokud je hodnota skrývající se pod zadaným klíčem == true jinak nic<br>
+	</p>
