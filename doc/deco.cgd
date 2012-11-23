@@ -3,7 +3,7 @@
 
 @name Metody elementu
 @description Metody, jimiž je odekorován element
-@prefix element.
+@prefix element
 
 
 Největší část této knihovny se věnuje odekorování elementu užitečnými metodami.
@@ -14,7 +14,8 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 
 @function animate( time, what, start, end, method="LINEAR", endcallback= )
 	@note Tato metoda <a href="#section6">zamyká element</a>.
-	@warning Tato metoda vyžaduje JAK.CSSInterpolator. Soubor jax-all.js obsahuje vždy funkční verzi.
+	@note Tato metoda vyžaduje JAK.CSSInterpolator. Soubor jax-all.js obsahuje vždy funkční verzi.
+	@warning Known bug: Při animaci rozměrů (width, height) nefunguje hodnota null (automatické zjištění hodnoty) v IE. Chyba je ve funkci JAK.DOM.getStyle. Pokusím se tento problém vyřešit v dohledné době.
 	Metoda slouží k animaci CSS vlastností. Je třeba zadat *time* v
 	milisekundách a co se bude animovat *what* (viz níže). Další
 	potřebnou informací je v jakém rozsahu hodnot animace proběhne *start* - *end*.
@@ -246,11 +247,11 @@ Odekorovaní provádí [JAX.$] nebo [JAX.$$].
 	*meter_in_dom* == true pak se bude velikost elementu měřit v místě kde je - budou na něj aplikována CSS pravidla z rodiče. Více informací u [JAX.OffScreenMeter].
 
 	@example
-		element.getRect() =&gt; {<br/>
-		    "left": #,<br/>
-		    "top": #,<br/>
-		    "width": #,<br/>
-		    "height": #<br/>
+		element.getRect() = {
+		    "left": x,
+		    "top": y,
+		    "width": w,
+		    "height": h
 		}
 	@end_example
 

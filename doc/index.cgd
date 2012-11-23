@@ -1,9 +1,7 @@
 @page index
 @language javascript
 
-@name Index
-
-@section JAX v{version} - JAK Extended
+@name JAX v{version} - JAK Extended
 
 Dokumentace je platná pro verzi <b>{version}</b>.<br/>
 <br/>

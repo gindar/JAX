@@ -276,7 +276,7 @@ JAX.ElementDecorator.prototype.remove = function(anim){
 	if(this._lockCheck("remove",arguments)) return this;
 	var anim = anim||0;
 	if(anim){
-		this.opacity(0,anim,"SQRT",this._remove.bind(this));
+		this.opacity(0, anim, "SQRT", this._remove.bind(this));
 	} else {
 		this._remove();
 	}
@@ -287,9 +287,12 @@ JAX.CollectionMethod("remove");
 // Odstrani element vsechny jeho potomky
 JAX.ElementDecorator.prototype.removeNodes = function(query){
 	if(this._lockCheck("removeNodes",arguments)) return this;
-	var elms = JAX.query( query, this );
+	var elms = this.childNodes;
+	var qparsed = JAX._queryparse(query);
 	for( var i = 0; i < elms.length; i ++ ){
-		this.removeChild( elms[i] );
+		if(JAX._query_checkElm(elms[i], qparsed, i, elms.length)){
+			this.removeChild( elms[i] );
+		}
 	}
 	return this;
 };

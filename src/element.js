@@ -29,9 +29,9 @@ JAX.$$ = function(elm_id){
 }
 
 JAX.DecorateElement = function( elm, recursive ){
-	var recursive = !!recursive;
 	if(!elm) return false;
 	if(elm.__decorated) return false;
+	var recursive = !!recursive;
 	for(var method in JAX.ElementDecorator.prototype){
 		elm[method] = JAX.ElementDecorator.prototype[method];
 	}
