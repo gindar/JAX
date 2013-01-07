@@ -19,7 +19,9 @@ Ve slozce deps/ jsou tyto knihovny ve verzi s niz funguje jax bezproblemove.
 Soubor jax-all.js obsahuje timekeeper i interpolator.
 
 Baleni vlastni verze JAXu (vytvari jax.js jax-all.js a jax-<verze>.zip):
- - './build.sh' - vybuildi jax*.js a dokumentaci a navic to vse zabali do ZIPu ( vyžaduje [gindar/codegrinder] )
+ - './build.sh' - vybuildi jax*.js a dokumentaci a navic to vse zabali do ZIPu
+ 
+K vybuildeni dokumentace je potreba CodeGrinder2 http://bitbucket.org/gindar/codegrinder2
   
 Chyby a napady: https://github.com/gindar/JAX/issues
 
