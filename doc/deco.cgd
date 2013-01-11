@@ -3,7 +3,7 @@
 
 @name Metody elementu
 @description Metody, jimiž je odekorován element
-@prefix element.
+@prefix element
 
 
 Největší část této knihovny se věnuje odekorování elementu užitečnými metodami.
