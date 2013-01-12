@@ -91,7 +91,7 @@ JAX.copy = function( obj ){
 		}
 		return result;
 	} else if( typeof(obj) == "function" ){
-		throw TypeError("Not implemented vole.");
+		throw TypeError("Not implemented.");
 	} else {
 		return obj;
 	}
